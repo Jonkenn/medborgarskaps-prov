@@ -47,3 +47,5 @@ next-env.d.ts
 # fumadocs-mdx generated files
 .source/
 .vercel
+
+.vercel
