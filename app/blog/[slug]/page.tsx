@@ -84,7 +84,7 @@ export async function generateMetadata(
       `${canonicalUrl}/opengraph-image`;
 
     const keywords: string[] = Array.isArray(d.tags) ? [...d.tags] : [];
-    keywords.push("Swedish Citizenship", "Sweden", "Immigration", "Living in Sweden");
+    keywords.push("Medborgarskapsprov", "Medborgarskap", "Migration", "Sverige");
 
     const publishedTime =
       d.date && !Number.isNaN(new Date(d.date).getTime())
@@ -104,7 +104,7 @@ export async function generateMetadata(
       publishedTime,
       modifiedTime,
       keywords,
-      authorName: d.author || "Swedish Citizenship",
+      authorName: d.author || "Medborgarskapsprov.se",
       authorImageUrl:
         typeof d.authorImage === "string" && d.authorImage.length > 0
           ? d.authorImage
@@ -115,13 +115,13 @@ export async function generateMetadata(
       title: d.title || "Blog Post",
       description:
         d.description ||
-        `Read about ${d.title || "this topic"} on Swedish Citizenship blog`,
+        `Read about ${d.title || "this topic"} on Medborgarskapsprov.se`,
       keywords,
       authors: [
-        { name: d.author || "Swedish Citizenship", url: siteConfig.url },
+        { name: d.author || "Medborgarskapsprov.se", url: siteConfig.url },
       ],
-      creator: d.author || "Swedish Citizenship",
-      publisher: "Swedish Citizenship",
+      creator: d.author || "Medborgarskapsprov.se",
+      publisher: "Medborgarskapsprov.se",
       alternates: { canonical: canonicalUrl },
       robots: {
         index: true,
@@ -143,7 +143,7 @@ export async function generateMetadata(
         locale: "en_US",
         publishedTime,
         modifiedTime,
-        authors: [d.author || "Swedish Citizenship"],
+        authors: [d.author || "Medborgarskapsprov.se"],
         tags: Array.isArray(d.tags) ? d.tags : undefined,
         images: [
           {
@@ -159,16 +159,16 @@ export async function generateMetadata(
         title: d.title || "Blog Post",
         description: d.description || "",
         images: [ogImageUrl],
-        creator: "@swedishcitizen",
-        site: "@swedishcitizen",
+        creator: "@medborgarskapsprov",
+        site: "@medborgarskapsprov",
       },
       other: { "script:ld+json": JSON.stringify(structuredData) },
     };
   } catch {
     return {
-      title: "Swedish Citizenship Blog",
+      title: "Medborgarskapsprov.se",
       description:
-        "Read the latest articles about Swedish citizenship and life in Sweden.",
+        "Read the latest articles about medborgarskapsprovet, migration och livet i Sverige.",
     };
   }
 }
@@ -199,7 +199,7 @@ export default async function BlogPost({ params }: PageProps) {
 
   const canonicalUrl = `${siteConfig.url}/blog/${slug}`;
   const keywords: string[] = Array.isArray(d.tags) ? [...d.tags] : [];
-  keywords.push("Swedish Citizenship", "Sweden", "Immigration", "Living in Sweden");
+  keywords.push("Medborgarskapsprov", "Medborgarskap", "Migration", "Sverige");
 
   const publishedTime =
     d.date && !Number.isNaN(new Date(d.date).getTime())
@@ -221,7 +221,7 @@ export default async function BlogPost({ params }: PageProps) {
     publishedTime,
     modifiedTime,
     keywords,
-    authorName: d.author || "Swedish Citizenship",
+    authorName: d.author || "Medborgarskapsprov.se",
     authorImageUrl:
       typeof d.authorImage === "string" && d.authorImage.length > 0
         ? d.authorImage

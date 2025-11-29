@@ -23,9 +23,9 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   keywords: metadataKeywords,
-  authors: [{ name: "Swedish Citizenship", url: siteConfig.url }],
-  creator: "SwedishCitizenship",
-  publisher: "Swedish Citizenship",
+  authors: [{ name: "Medborgarskapsprov.se", url: siteConfig.url }],
+  creator: "Medborgarskapsprov.se",
+  publisher: "Medborgarskapsprov.se",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -46,8 +46,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    creator: "@swedishcitizen",
-    site: "@swedishcitizen",
+    creator: "@medborgarskapsprov",
+    site: "@medborgarskapsprov",
     images: ["/og-image.jpg"],
   },
   robots: {

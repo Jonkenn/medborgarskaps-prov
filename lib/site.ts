@@ -1,8 +1,8 @@
 export const siteConfig = {
-  name: "Swedish Citizenship: a blog about moving & living in Sweden",
-  url: "https://www.swedishcitizenship.se",
+  name: "Medborgarskapsprov.se – om Sveriges medborgarskapsprov",
+  url: "https://www.medborgarskaps-prov.se",
   description:
-    "Swedish Citizenship is a blog about Sweden, citizenship, and everything in between. News, politics, culture - and everything in between about moving, working & living in Sweden..",
+    "Medborgarskapsprov.se samlar guider, analyser och nyheter om det svenska medborgarskapsprovet och hur reglerna påverkar vardagen i Sverige.",
 };
 
 export type SiteConfig = typeof siteConfig;

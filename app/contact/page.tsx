@@ -15,9 +15,9 @@ const structuredData = [
   websiteSchema,
   buildWebPageSchema(
     "ContactPage",
-    "Contact SwedishCitizenship.se",
+    "Contact Medborgarskapsprov.se",
     canonicalUrl,
-    "Contact SwedishCitizenship.se – get in touch about Swedish citizenship, migration policy, and life in Sweden.",
+    "Contact Medborgarskapsprov.se – get in touch about medborgarskapsprovet, migrationspolitik och vardagsliv i Sverige.",
   ),
   buildBreadcrumbList([
     { name: "Home", item: siteConfig.url },
@@ -26,20 +26,20 @@ const structuredData = [
 ];
 
 export const metadata: Metadata = {
-  title: "Contact SwedishCitizenship.se",
+  title: "Contact Medborgarskapsprov.se",
   description:
-    "Contact SwedishCitizenship.se – get in touch about Swedish citizenship, migration policy, and life in Sweden.",
+    "Contact Medborgarskapsprov.se – get in touch about medborgarskapsprovet, migrationspolitik och vardagsliv i Sverige.",
   alternates: { canonical: canonicalUrl },
   openGraph: {
-    title: "Contact SwedishCitizenship.se",
+    title: "Contact Medborgarskapsprov.se",
     description:
-      "Contact SwedishCitizenship.se – get in touch about Swedish citizenship, migration policy, and life in Sweden.",
+      "Contact Medborgarskapsprov.se – get in touch about medborgarskapsprovet, migrationspolitik och vardagsliv i Sverige.",
     type: "website",
   },
   twitter: {
-    title: "Contact SwedishCitizenship.se",
+    title: "Contact Medborgarskapsprov.se",
     description:
-      "Contact SwedishCitizenship.se – get in touch about Swedish citizenship, migration policy, and life in Sweden.",
+      "Contact Medborgarskapsprov.se – get in touch about medborgarskapsprovet, migrationspolitik och vardagsliv i Sverige.",
   },
   other: { "script:ld+json": JSON.stringify(structuredData) },
 };
@@ -66,7 +66,7 @@ export default function ContactPage() {
       <div className="p-6 border-b border-border flex flex-col gap-6 min-h-[200px] justify-center relative z-10">
         <div className="max-w-4xl mx-auto w-full">
           <h1 className="font-medium text-4xl md:text-5xl tracking-tighter">
-            Contact SwedishCitizenship.se
+            Contact Medborgarskapsprov.se
           </h1>
           <p className="text-muted-foreground text-sm md:text-base lg:text-lg mt-3">
             If you have feedback, suggestions for topics, or have found an error in an article,
@@ -79,12 +79,10 @@ export default function ContactPage() {
       <div className="max-w-4xl mx-auto w-full px-6 lg:px-0 py-10 relative z-10">
         <div className="prose dark:prose-invert max-w-none prose-headings:scroll-mt-8 prose-headings:font-semibold prose-headings:tracking-tight prose-p:tracking-tight prose-p:text-balance prose-lg">
           <h2>How to contact</h2>
+          <p>You can contact Medborgarskapsprov.se by email:</p>
           <p>
-            You can contact SwedishCitizenship.se by email:
-          </p>
-          <p>
-            <a href="mailto:info@swedishcitizenship.se">
-              info@swedishcitizenship.se
+            <a href="mailto:info@medborgarskaps-prov.se">
+              info@medborgarskaps-prov.se
             </a>
           </p>
           <p>

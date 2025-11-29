@@ -101,7 +101,8 @@ export const buildBlogPostingStructuredData = (
     "@type": "BlogPosting",
     headline: title || "Blog Post",
     description:
-      description || `Read about ${title || "this topic"} on Swedish Citizenship blog`,
+      description ||
+      `Read about ${title || "this topic"} on Medborgarskapsprov.se`,
     mainEntityOfPage: canonicalUrl,
     author: {
       "@type": "Person",

@@ -204,7 +204,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
                   assetData?.logoBase64 ||
                   `${process.env.NEXT_PUBLIC_SITE_URL}/swedish-citizenship-logo.png`
                 }
-                alt="Swedish Citizenship Logo"
+                alt="Medborgarskapsprov.se Logo"
                 width={80}
                 height={80}
                 style={styles.logo}

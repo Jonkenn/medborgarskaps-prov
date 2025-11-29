@@ -97,10 +97,10 @@ export default async function HomePage({
         <div className="max-w-7xl mx-auto w-full">
           <div className="flex flex-col gap-2">
             <h1 className="font-medium text-4xl md:text-5xl tracking-tighter">
-              Swedish Citizenship: a blog
+              Medborgarskapsprov.se
             </h1>
             <p className="text-muted-foreground text-sm md:text-base lg:text-lg">
-              News, politics, culture - and everything in between Swedish citizenship.
+              Guider, nyheter och analyser om medborgarskapsprovet, migration och vardagsliv i Sverige.
             </p>
           </div>
         </div>
