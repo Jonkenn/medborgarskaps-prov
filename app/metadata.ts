@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   creator: "Medborgarskapsprov.se",
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "sv_SE",
     url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,
