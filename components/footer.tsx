@@ -10,13 +10,13 @@ export default function Footer() {
 
         <div className="flex gap-4 text-sm">
            <Link href="/" className="text-muted-foreground hover:text-foreground">
-            Home
+            Startsida
           </Link>
           <Link href="/about" className="text-muted-foreground hover:text-foreground">
-            About
+            Om oss
           </Link>
           <Link href="/contact" className="text-muted-foreground hover:text-foreground">
-            Contact
+            Kontakta oss
           </Link>
         </div>
       </div>

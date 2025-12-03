@@ -22,10 +22,10 @@ export function PromoContent({
           />
           <div className="flex-1 min-w-0">
             <p className="text-xs font-medium text-foreground/90 truncate">
-              We&apos;re at Facebook
+             Medborgarskapsprov på Facebook
             </p>
             <p className="text-xs text-muted-foreground truncate">
-              Meet, discuss & talk with people about medborgarskapsprovet och livet i Sverige.
+              Gå med i vår Facebook-grupp för att diskutera med andra om medborgarskapsprovet.
             </p>
           </div>
           <a
@@ -35,7 +35,7 @@ export function PromoContent({
             className="text-xs text-primary hover:text-primary/80 font-medium"
             onClick={(e: React.MouseEvent) => e.stopPropagation()}
           >
-            Learn more
+            Gå med nu
           </a>
         </div>
       </div>
