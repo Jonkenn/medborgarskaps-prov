@@ -24,7 +24,7 @@ const getAssetData = async (authorAvatar?: string) => {
     const assetUrls = {
       clashDisplay: `${baseUrl}/fonts/ClashDisplay-Semibold.ttf`,
       cabinetGrotesk: `${baseUrl}/fonts/CabinetGrotesk-Medium.ttf`,
-      logo: `${baseUrl}/swedish-citizenship-logo.png`,
+      logo: `${baseUrl}/medborgarskapsprov-horizontal-logo.png`,
       ...(authorAvatar && { authorAvatar: `${baseUrl}${authorAvatar}` }),
     };
 
@@ -202,7 +202,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
               <img
                 src={
                   assetData?.logoBase64 ||
-                  `${process.env.NEXT_PUBLIC_SITE_URL}/swedish-citizenship-logo.png`
+                  `${process.env.NEXT_PUBLIC_SITE_URL}/medborgarskaps-prov-logo.png`
                 }
                 alt="Medborgarskapsprov.se Logo"
                 width={80}

@@ -9,7 +9,6 @@ import Footer from "@/components/footer";
 import "@/app/globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Script from "next/script";
 
 export const viewport: Viewport = {
   themeColor: "black",
@@ -28,7 +27,7 @@ export const metadata: Metadata = {
   publisher: "Medborgarskapsprov.se",
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "sv_SE",
     url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,
@@ -67,23 +66,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="en"
+      lang="sv"
       className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
       suppressHydrationWarning
     >
-      {/* Google Analytics */}
-      <Script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-Y7Q0KG12GP"
-      />
-      <Script id="ga4-config">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-Y7Q0KG12GP');
-        `}
-      </Script>
+ 
 
       <body>
         <ThemeProvider

@@ -1,8 +1,8 @@
 export const siteConfig = {
-  name: "Medborgarskapsprov.se – om Sveriges medborgarskapsprov",
+  name: "Medborgarskapsprov.se – om Sveriges medborgarskapsprov i samhällskunskap",
   url: "https://www.medborgarskaps-prov.se",
   description:
-    "Medborgarskapsprov.se samlar guider, analyser och nyheter om det svenska medborgarskapsprovet och hur reglerna påverkar vardagen i Sverige.",
+    "Vi har samlat all information om det svenska medborgarskapsprovet i samhällskunskap. Nyheter, guider, information & övningsprov för dig som vill bli svensk medborgare.",
 };
 
 export type SiteConfig = typeof siteConfig;
