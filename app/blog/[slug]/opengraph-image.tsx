@@ -182,7 +182,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
 
     const formatDate = (dateString: string) => {
       const date = new Date(dateString);
-      return date.toLocaleDateString("en-US", {
+      return date.toLocaleDateString("sv-SE", {
         year: "numeric",
         month: "long",
         day: "numeric",

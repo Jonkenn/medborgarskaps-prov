@@ -18,6 +18,13 @@ export default function Footer() {
           <Link href="/contact" className="text-muted-foreground hover:text-foreground">
             Kontakta oss
           </Link>
+                <Link
+  href="https://swedishcitizenship.se"
+  className="text-muted-foreground hover:text-foreground"
+>
+  Swedish Citizenship
+</Link>
+          
         </div>
       </div>
     </footer>
