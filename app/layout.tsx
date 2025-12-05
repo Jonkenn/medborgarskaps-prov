@@ -9,7 +9,8 @@ import Footer from "@/components/footer";
 import "@/app/globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
+import Script
+ from "next/script";
 export const viewport: Viewport = {
   themeColor: "black",
 };
@@ -70,7 +71,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
       suppressHydrationWarning
     >
- 
+
+    
+       {/* Google Analytics */}
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-59WFYQRYBB"
+      />
+      <Script id="ga4-config">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-59WFYQRYBB');
+        `}
+      </Script>
+
 
       <body>
         <ThemeProvider
