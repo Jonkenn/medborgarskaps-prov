@@ -23,7 +23,7 @@ import { HashScrollHandler } from "@/components/hash-scroll-handler";
 import type { ComponentType } from "react";
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 interface BlogData {
@@ -56,7 +56,7 @@ export async function generateMetadata(
   { params }: PageProps
 ): Promise<Metadata> {
   try {
-const { slug } = params;
+    const { slug } = await params;
 
     if (!slug || slug.length === 0) {
       return {
@@ -174,7 +174,7 @@ const { slug } = params;
 }
 
 export default async function BlogPost({ params }: PageProps) {
-  const { slug } = params;
+  const { slug } = await params;
 
   if (!slug || slug.length === 0) {
     notFound();
