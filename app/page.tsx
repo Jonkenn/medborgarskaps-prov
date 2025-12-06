@@ -100,7 +100,7 @@ export default async function HomePage({
               Medborgarskapsprov
             </h1>
             <p className="text-muted-foreground text-sm md:text-base lg:text-lg">
-              Guider, nyheter och analyser om medborgarskapsprovet, migration och vardagsliv i Sverige.
+              Guider, nyheter och analyser om medborgarskapsprovet i samhällskunskap.
             </p>
           </div>
         </div>
