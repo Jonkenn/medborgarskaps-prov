@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { siteConfig } from "@/lib/site";
 import {
   buildBreadcrumbList,
@@ -16,26 +17,26 @@ const faqStructuredData = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "Vad är en medborgarskapsprov app?",
+      name: "Finns det en app för medborgarskapsprovet idag?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "En medborgarskapsprov app är en mobilapplikation där du kan träna inför det svenska medborgarskapsprovet med hjälp av quiz, övningsfrågor och korta förklaringar om det svenska samhället. Syftet är att göra det enkelt att plugga samhällskunskap direkt i mobilen.",
+        text: "I dag finns det ingen officiell app för det svenska medborgarskapsprovet. Eftersom provet ännu inte har införts har varken staten eller andra aktörer lanserat en färdig app som följer ett fastställt officiellt underlag.",
       },
     },
     {
       "@type": "Question",
-      name: "Är Medborgarskaps-prov.se:s medborgarskapsprov app ett officiellt prov?",
+      name: "Kommer Medborgarskapsprov.se att släppa en egen app?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Nej. Medborgarskaps-prov.se är en oberoende informationssida och appen är inte ett officiellt prov. En medborgarskapsprov app från Medborgarskaps-prov.se är tänkt som stöd och träning, inte som ett ersättande av det riktiga provet som genomförs av ansvarig myndighet.",
+        text: "Målet med Medborgarskapsprov.se är att på sikt kunna erbjuda en app där du kan träna på frågor kopplade till medborgarskapsprovet. Fokus är att bygga vidare på det innehåll som redan finns på webbplatsen, med strukturerade quiz och övningsprov anpassade för mobilen.",
       },
     },
     {
       "@type": "Question",
-      name: "Är medborgarskapsprov appen gratis att använda?",
+      name: "Vad ska jag tänka på när jag väljer app för medborgarskapsprov?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Målet med Medborgarskaps-prov.se är att erbjuda så mycket vägledning och övning som möjligt utan kostnad eller till låg tröskel. Exakt upplägg för en medborgarskapsprov app kan variera, men grundidén är att du ska kunna träna enkelt i mobilen utan krånglig inloggning.",
+        text: "När det väl finns appar för medborgarskapsprov bör du titta på vem som står bakom appen, hur uppdaterat innehållet är, om frågorna tydligt förklaras och om appen verkar följa samma inriktning som det officiella provet. Var försiktig med appar som lovar 'originalfrågor' från provet – de är inte offentliga.",
       },
     },
   ],
@@ -46,9 +47,9 @@ const structuredData = [
   websiteSchema,
   buildWebPageSchema(
     "WebPage",
-    "Medborgarskapsprov app – träna i mobilen med quiz och övningsprov",
+    "Medborgarskapsprov app – så kan du träna i mobilen när provet införs",
     canonicalUrl,
-    "Medborgarskapsprov app – lär dig samhällskunskap och träna inför det svenska medborgarskapsprovet direkt i mobilen med quiz, övningsfrågor och förklaringar från Medborgarskaps-prov.se."
+    "Guide till medborgarskapsprov i app – hur en framtida app kan fungera, vad du ska tänka på när du väljer app och hur du redan nu kan förbereda dig med hjälp av Medborgarskapsprov.se."
   ),
   buildBreadcrumbList([
     { name: "Hem", item: siteConfig.url },
@@ -59,23 +60,23 @@ const structuredData = [
 
 export const metadata: Metadata = {
   title:
-    "Medborgarskapsprov i app – träna i mobilen med quiz och övningsprov",
+    "Medborgarskapsprov i app – så kan du träna i mobilen när provet införs",
   description:
-    "Medborgarskapsprov app – plugga inför det svenska medborgarskapsprovet direkt i mobilen med quiz, övningsfrågor och tydliga förklaringar om det svenska samhället.",
+    "Finns det en app för medborgarskapsprovet? Här går vi igenom hur en medborgarskapsprov app kan fungera, vad du ska tänka på och hur du redan nu kan förbereda dig med hjälp av Medborgarskapsprov.se.",
   alternates: { canonical: canonicalUrl },
   openGraph: {
     title:
-      "Medborgarskapsprov app – träna i mobilen inför medborgarskapstestet",
+      "Medborgarskapsprov app – guide till att träna i mobilen",
     description:
-      "Använd en medborgarskapsprov app för att träna samhällskunskap i mobilen. Quiz, övningsprov och pedagogiska förklaringar från Medborgarskaps-prov.se.",
+      "En genomgång av hur en app för medborgarskapsprov kan se ut, vilka funktioner som är viktiga och hur du förbereder dig redan idag med Medborgarskapsprov.se.",
     type: "website",
     url: canonicalUrl,
   },
   twitter: {
     title:
-      "Medborgarskapsprov app – quiz och övningsprov i mobilen",
+      "Medborgarskapsprov app – hur kan en sån fungera?",
     description:
-      "Medborgarskapsprov app från Medborgarskaps-prov.se – träna inför det svenska medborgarskapsprovet med quiz och övningsfrågor direkt i mobilen.",
+      "Läs om hur en framtida medborgarskapsprov app kan vara uppbyggd, vad du ska tänka på när du väljer app och hur du kan plugga redan nu.",
   },
   other: { "script:ld+json": JSON.stringify(structuredData) },
 };
@@ -103,170 +104,184 @@ export default function AppPage() {
       <div className="p-6 border-b border-border flex flex-col gap-6 min-h-[200px] justify-center relative z-10">
         <div className="max-w-4xl mx-auto w-full">
           <h1 className="font-medium text-4xl md:text-5xl tracking-tighter">
-            Medborgarskapsprov i app: träna inför provet i mobilen
+            Medborgarskapsprov i app: så kan du plugga i mobilen
           </h1>
           <p className="text-muted-foreground text-sm md:text-base lg:text-lg mt-3">
-            En medborgarskapsprov app gör det möjligt att plugga inför det
-            svenska medborgarskapsprovet direkt i mobilen. Med quiz,
-            övningsfrågor och korta förklaringar kan du träna på
-            samhällskunskap, demokrati, lagar och vardagsliv – utan att vara
-            bunden till en dator eller tjocka böcker.
+            Många undrar om det finns en app där man kan plugga till
+            medborgarskapsprovet – gärna med quiz, övningsfrågor och tydliga
+            förklaringar direkt i mobilen. Här går vi igenom hur en
+            medborgarskapsprov app skulle kunna fungera, vad som är viktigt att
+            tänka på och hur du redan nu kan förbereda dig innan provet ens är
+            på plats.
           </p>
           <p className="text-muted-foreground text-sm md:text-base lg:text-lg mt-3">
-            Medborgarskaps-prov.se bygger mot en medborgarskapsprov app som
-            kompletterar artiklarna på sajten. Tanken är att du ska kunna
-            växla mellan att läsa mer fördjupande innehåll och att snabbt testa
-            dina kunskaper i appen.
+            På{" "}
+            <Link
+              href="/"
+              className="underline underline-offset-4 font-medium"
+            >
+              Medborgarskapsprov.se
+            </Link>{" "}
+            hittar du bakgrund, regler och genomgångar kring det kommande
+            medborgarskapsprovet. I{" "}
+            <Link
+              href="/online"
+              className="underline underline-offset-4 font-medium"
+            >
+              Medborgarskapsprov online
+            </Link>{" "}
+            samlar vi digitala övningsprov, och i guiden{" "}
+            <Link
+              href="/samhällskunskap"
+              className="underline underline-offset-4 font-medium"
+            >
+              Medborgarskapsprov i samhällskunskap
+            </Link>{" "}
+            förklarar vi vilket innehåll – alltså vilken typ av
+            samhällskunskap – provet är tänkt att testa.
           </p>
         </div>
       </div>
 
       <div className="max-w-4xl mx-auto w-full px-6 lg:px-0 py-10 relative z-10">
         <div className="prose dark:prose-invert max-w-none prose-headings:scroll-mt-8 prose-headings:font-semibold prose-headings:tracking-tight prose-p:tracking-tight prose-p:text-balance prose-lg">
-          <h2>Vad är en medborgarskapsprov app?</h2>
+          <h2>Finns det någon app för medborgarskapsprovet idag?</h2>
           <p>
-            En medborgarskapsprov app är en mobilapplikation där du kan träna
-            inför medborgarskapsprovet genom strukturerade quiz, korta
-            övningsprov och tydliga förklaringar av det svenska samhället.
-            Fokus ligger på att göra träningen snabb, tillgänglig och enkel att
-            få in i vardagen.
+            I dag finns det ingen officiell app för det svenska
+            medborgarskapsprovet. Skälet är enkelt: provet är ännu inte
+            infört i praktiken, och det finns därför inget färdigt officiellt
+            underlag som en app kan bygga direkt på.
           </p>
           <p>
-            Med en medborgarskapsprov app från Medborgarskaps-prov.se kan du
-            använda samma grundidé som på webbplatsen – tydlig, saklig
-            information – men anpassad för mobilen med kortare frågepass och
-            tydlig uppföljning på hur det går.
-          </p>
-
-          <h2>Varför träna i en medborgarskapsprov app?</h2>
-          <p>
-            För många är mobilen det naturliga verktyget för studier i vardagen.
-            En medborgarskapsprov app gör att du kan:
-          </p>
-          <ul>
-            <li>träna några minuter åt gången – på bussen, rasten eller kvällen</li>
-            <li>få direkt feedback på rätt och fel svar</li>
-            <li>följa din utveckling över tid med resultat och statistik</li>
-            <li>kombinera korta quiz med längre övningsprov vid behov</li>
-          </ul>
-          <p>
-            Poängen är inte bara att svara rätt, utan att steg för steg bygga
-            upp en stabil förståelse inför det riktiga provet.
+            Det kan dyka upp appar och quiz som säger att de handlar om
+            medborgarskapsprov, men de är alltid fristående initiativ. Inga
+            företag eller privatpersoner har tillgång till “originalfrågor”
+            eller ett slutgiltigt facit från staten – de frågorna är inte
+            offentliga.
           </p>
 
-          <h2>Funktioner i en bra medborgarskapsprov app</h2>
+          <h2>Vad skulle en bra medborgarskapsprov app innehålla?</h2>
           <p>
-            En genomtänkt medborgarskapsprov app bör ha funktioner som gör det
-            enkelt att både lära sig och hålla motivationen uppe:
+            När det väl finns ett färdigt prov och en etablerad struktur är det
+            rimligt att vänta sig appar som hjälper dig att plugga. En genomtänkt
+            app för medborgarskapsprov bör då göra mer än att bara kasta frågor
+            på dig. Några viktiga delar:
           </p>
           <ul>
             <li>
-              <strong>Quiz i olika svårighetsnivåer</strong> – från grundläggande till mer avancerade frågor.
+              Tydliga quiz och övningsprov som liknar hur ett riktigt prov kan
+              kännas.
             </li>
             <li>
-              <strong>Indelning efter ämnesområde</strong> – till exempel demokrati, lagar, välfärd och vardagsliv.
+              Förklaringar till svaren – så att du ser varför något är rätt eller
+              fel, inte bara får ett resultat.
             </li>
             <li>
-              <strong>Förklaringar till svaren</strong> – så att du förstår varför ett svar är rätt eller fel.
+              Indelning efter område, till exempel demokrati, lagar, välfärd,
+              arbete och vardagsliv.
             </li>
             <li>
-              <strong>Progressionsöversikt</strong> – så att du ser vilka delar du behöver träna mer på.
+              Någon form av statistik eller utvecklingskurva så att du ser vad
+              du behöver träna mer på.
             </li>
           </ul>
           <p>
-            En medborgarskapsprov app från Medborgarskaps-prov.se kan knyta
-            an till de artiklar och genomgångar som redan finns på sajten, så
-            att du enkelt kan fördjupa dig där du känner dig osäker.
+            Poängen med en app är att göra det enkelt att träna ofta, kort och
+            utan krångel – inte att ersätta allt annat material.
           </p>
 
-          <h2>Hur hänger medborgarskapsprov app och webbplats ihop?</h2>
+          <h2>Vem står bakom innehållet i en app?</h2>
           <p>
-            Medborgarskaps-prov.se fungerar som bas med längre texter, bakgrund
-            och analyser av hur medborgarskapsprovet är tänkt att fungera.
-            En medborgarskapsprov app kompletterar genom att:
+            Om och när det börjar lanseras appar för medborgarskapsprov är en av
+            de viktigaste frågorna: vem har gjort appen och hur har innehållet
+            tagits fram? Är det en seriös aktör som faktiskt följer det
+            samhällskunskapsinnehåll som politiskt beslutats, eller är det mest
+            snabba quiz utan tydlig grund?
           </p>
-          <ul>
-            <li>samla utvalda frågor och quiz i mobilen</li>
-            <li>göra repetitionen smidigare och mer vardagsnära</li>
-            <li>låta dig fortsätta där du slutade – oavsett om du var i appen eller på webben</li>
-          </ul>
           <p>
-            Målet är att du ska kunna använda både webbplatsen och en
-            medborgarskapsprov app som delar av samma förberedelse.
-          </p>
-
-          <h2>Vilka områden tränar du i en medborgarskapsprov app?</h2>
-          <p>
-            Innehållet i en medborgarskapsprov app utgår från samma typ av
-            samhällskunskap som väntas testas i det riktiga provet:
-          </p>
-          <ul>
-            <li>svensk demokrati och hur beslut fattas</li>
-            <li>grundläggande fri- och rättigheter</li>
-            <li>lagar, rättssystem och rättssäkerhet</li>
-            <li>välfärd, vård, skola och socialförsäkringar</li>
-            <li>arbete, ekonomi och arbetsmarknad</li>
-            <li>vardag och normer i Sverige</li>
-          </ul>
-          <p>
-            Genom att träna på frågor inom dessa områden i en
-            medborgarskapsprov app får du en bred bild av hur samhället fungerar.
+            Du bör vara skeptisk till lovord som “originalfrågor” eller
+            “samma prov som staten använder”. Det stämmer inte – de riktiga
+            frågorna publiceras inte. En ärlig app fokuserar istället på
+            relevanta områden och tydliga förklaringar.
           </p>
 
-          <h2>För vem passar en medborgarskapsprov app?</h2>
+          <h2>Vad kostar en app för medborgarskapsprov?</h2>
           <p>
-            En medborgarskapsprov app passar dig som:
+            Priserna kommer troligen att variera. Vissa appar kan vara gratis
+            med reklam, andra kan ta en engångssumma eller ha abonnemang. Det
+            viktiga är inte bara priset, utan om du faktiskt får något vettigt
+            för pengarna:
           </p>
           <ul>
-            <li>planerar att ansöka om svenskt medborgarskap</li>
-            <li>vill kunna träna korta pass när du har tid över</li>
-            <li>föredrar mobil och surfplatta framför dator</li>
-            <li>behöver ett tydligt, strukturerat sätt att repetera samhällskunskap</li>
+            <li>Är innehållet begripligt och uppdaterat?</li>
+            <li>Finns det tydliga förklaringar bakom svaren?</li>
+            <li>Följer appen det som faktiskt testas i provet?</li>
           </ul>
           <p>
-            Appen fungerar också som ett stöd för studiecirklar och lärare som
-            vill låta deltagare träna på egen hand mellan träffar.
+            Ett högt pris är ingen kvalitetsgaranti – och gratis är inte
+            automatiskt dåligt. Men du ska få mer än slumpmässiga frågor.
+          </p>
+
+          <h2>Hur kan du plugga redan nu – innan det finns appar?</h2>
+          <p>
+            Även om det inte finns någon färdig app i dag kan du börja bygga upp
+            din samhällskunskap. Det kommande provet handlar inte om att kunna
+            enskilda “appfrågor”, utan om att förstå hur samhället fungerar.
+          </p>
+          <p>
+            Du kan till exempel:
+          </p>
+          <ul>
+            <li>Läsa om demokrati, lagar och rättigheter.</li>
+            <li>Sätta dig in i hur vård, skola och välfärd är uppbyggda.</li>
+            <li>Följa nyheter och försöka förstå varför beslut tas som de gör.</li>
+            <li>Träna på att läsa och resonera kring samhällsfrågor.</li>
+          </ul>
+          <p>
+            När appar väl börjar dyka upp har du då redan en grund att stå på –
+            och kan använda dem som ett komplement, inte som enda källa.
           </p>
 
           <h2>Vanliga frågor om medborgarskapsprov app</h2>
 
-          <h3>Är det samma frågor som på det riktiga provet?</h3>
+          <h3>Finns det någon app att ladda ner redan nu?</h3>
           <p>
-            Nej. Det officiella provets frågor styrs av staten och offentliggörs
-            inte i förväg. En medborgarskapsprov app använder egna frågor, men
-            med liknande nivå och ämnesval, för att du ska vänja dig vid
-            tankesättet.
+            Det finns appar och quiz om svensk samhällskunskap, men ingen
+            officiell app som bygger direkt på ett fastställt
+            medborgarskapsprov. Alla sådana appar är fristående initiativ och
+            ska ses som stödmaterial, inte som “det riktiga provet i mobilen”.
           </p>
 
-          <h3>Räcker det att bara använda en medborgarskapsprov app?</h3>
+          <h3>Kommer det att dyka upp fler appar när provet införs?</h3>
           <p>
-            En medborgarskapsprov app är ett starkt stöd, men ger bäst effekt
-            tillsammans med mer fördjupande läsning och genomgångar. Kombinationen
-            av artiklar på Medborgarskaps-prov.se och träning i appen ger en mer
-            komplett förberedelse.
+            Ja, det är mycket sannolikt. När provet väl är infört kommer fler
+            aktörer att försöka bygga digitala verktyg för den som vill plugga.
+            Då blir frågan ännu viktigare: vilka appar ger faktiskt bra
+            förberedelse och vilka är mest yta?
           </p>
 
-          <h3>Behöver jag vara tekniskt kunnig för att använda appen?</h3>
+          <h3>Räcker det att plugga i en app?</h3>
           <p>
-            En medborgarskapsprov app är tänkt att vara enkel och tydlig.
-            Fokus ligger på stora knappar, korta quiz och lättnavigerade
-            menyer, så att du kan ägna energin åt innehållet i stället för
-            tekniken.
+            Nej. En app kan vara ett bra komplement, men den ersätter inte
+            behovet av att förstå helheten. Det riktiga provet testar din
+            samhällskunskap – inte om du har memorerat ett visst antal appfrågor.
+            Se en app som ett sätt att repetera och testa dig själv, inte som
+            hela strategin.
           </p>
 
-          <h2>Medborgarskapsprov app som del av din strategi</h2>
+          <h2>Sammanfattning: appen är ett verktyg – inte allt</h2>
           <p>
-            En medborgarskapsprov app är ett praktiskt verktyg för att göra
-            förberedelserna inför medborgarskapsprovet mer vardagsvänliga.
-            Genom att träna lite och ofta, följa din utveckling och koppla
-            frågorna till tydliga förklaringar ökar du chansen att känna dig
-            trygg när det är dags att skriva provet.
+            En framtida app för medborgarskapsprov kan göra det mycket enklare
+            att träna i korta pass i mobilen. Men grunden är fortfarande att
+            förstå vad provet handlar om, vilka områden som testas och hur det
+            svenska samhället fungerar.
           </p>
           <p>
-            Medborgarskaps-prov.se samlar bakgrund, guider och övningar – och
-            en medborgarskapsprov app knyter ihop allt i mobilen. Tillsammans
-            ger de en tydlig väg mot bättre samhällskunskap och ett mer
-            förberett möte med det svenska medborgarskapsprovet.
+            Den här sidan ger dig en bild av hur en medborgarskapsprov app kan
+            se ut, vad du ska vara uppmärksam på och varför du inte ska lita på
+            löften om “originalfrågor”. När provet väl är på plats är du bättre
+            förberedd – oavsett om du pluggar via webben, böcker, appar eller en
+            kombination av allt.
           </p>
         </div>
       </div>
