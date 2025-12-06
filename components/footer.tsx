@@ -12,10 +12,10 @@ export default function Footer() {
            <Link href="/" className="text-muted-foreground hover:text-foreground">
             Startsida
           </Link>
-          <Link href="/about" className="text-muted-foreground hover:text-foreground">
+          <Link href="/om" className="text-muted-foreground hover:text-foreground">
             Om oss
           </Link>
-          <Link href="/contact" className="text-muted-foreground hover:text-foreground">
+          <Link href="/kontakt" className="text-muted-foreground hover:text-foreground">
             Kontakta oss
           </Link>
                 <Link
