@@ -201,8 +201,8 @@ Välkommen till Medborgarskapsprov.se. Vi samlar och förklarar all viktig infor
 
 <p className="text-sm md:text-base text-muted-foreground mb-6">
   På{" "}
-  <Link href="/online" className="underline underline-offset-4">
-    medborgarskapsprov online
+  <Link href="/samhallskunskap" className="underline underline-offset-4">
+    medborgarskapsprov i samhällskunskap
   </Link>{" "}
   presenteras samhällskunskapen i en tydligt strukturerad form där varje
   huvudområde behandlas var för sig. Upplägget är utformat för att ge en

@@ -142,10 +142,10 @@ export default function AboutPage() {
     <li>
       Redogöra för innehållet i{" "}
       <Link
-        href="/samhällskunskapsprov"
+        href="/samhallskunskap"
         className="underline underline-offset-4"
       >
-        samhällskunskapsprovet
+        medborgarskapsprov i samhällskunskap
       </Link>, inklusive demokrati, rättssystem, myndigheter, val och
       samhällsorganisation.
     </li>
