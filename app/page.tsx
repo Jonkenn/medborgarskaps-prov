@@ -99,10 +99,10 @@ export default async function HomePage({
         <div className="max-w-7xl mx-auto w-full">
           <div className="flex flex-col gap-2">
             <h1 className="font-medium text-2xl md:text-4xl tracking-tighter">
-              Medborgarskapsprov.se - allt om  medborgarskapsprovet i Sverige.
+              Medborgarskapsprov - allt om Sveriges medborgarskapsprov i samhällskunskap
             </h1>
             <p className="text-muted-foreground text-sm md:text-base lg:text-lg">
-Välkommen till Medborgarskapsprov.se. Vi samlar och förklarar all viktig information om det svenska medborgarskapsprovet på ett och samma ställe. Här får du en tydlig översikt av regler, krav, övningsfrågor och senaste nyheterna – så att du kan förbereda dig på rätt sätt inför provet.            </p>
+Välkommen till Medborgarskapsprov.Vi samlar och förklarar all viktig information om det svenska medborgarskapsprovet på ett och samma ställe. Här får du en tydlig översikt av regler, krav, övningsfrågor och senaste nyheterna – så att du kan förbereda dig på rätt sätt inför provet.            </p>
           </div>
         </div>
         {allTags.length > 0 && (
@@ -149,10 +149,10 @@ Välkommen till Medborgarskapsprov.se. Vi samlar och förklarar all viktig infor
             <section className="border-x border-b border-border py-10 px-6 lg:px-8 bg-background">
           <div className="max-w-3xl">
             <h2 className="text-2xl md:text-2xl font-semibold tracking-tight mb-3">
-              Om Medborgarskapsprov.se
+              Om oss
             </h2>
             <p className="text-sm md:text-base text-muted-foreground mb-3">
-              Ambitionen bakom Medborgarskapsprov.se är att med ett så sakligt
+              Vi på Medborgarskapsprov vill med ett så sakligt
               och objektivt perspektiv som möjligt ge en tydlig och korrekt
               bild av det svenska medborgarskapsprovet. De nya kraven, reglerna
               och den mängd information som finns kan göra det svårt att få en
@@ -177,18 +177,18 @@ Välkommen till Medborgarskapsprov.se. Vi samlar och förklarar all viktig infor
     <section className="border-x border-b border-border py-10 px-6 lg:px-8 bg-background">
   <div className="max-w-3xl">
     <h2 className="text-2xl md:text-2xl font-semibold tracking-tight mb-6">
-      Vägar till rätt information om medborgarskapsprovet
+      Vägar till rätt information om Sveriges medborgarskapsprov
     </h2>
 
     <p className="text-sm md:text-base text-muted-foreground mb-6">
-      Medborgarskapsprovet omfattar flera olika moment och kunskapsområden som
+      Provet omfattar flera olika moment och kunskapsområden som
       kan vara svåra att överblicka utan tydlig vägledning. Här presenteras
       samlad information om provets struktur, innehåll och övergripande krav,
       med fokus på att skapa en klar förståelse för hur helheten är uppbyggd och
       hur de olika delarna hänger samman.
     </p>
 <h3 className="text-lg md:text-xl font-semibold tracking-tight mb-3">
-  Medborgarskapsprovet i samhällskunskap
+  Medborgarskapsprov i samhällskunskap
 </h3>
 
 <p className="text-sm md:text-base text-muted-foreground mb-6">
@@ -217,7 +217,7 @@ Välkommen till Medborgarskapsprov.se. Vi samlar och förklarar all viktig infor
 
 
     <h3 className="text-lg md:text-xl font-semibold tracking-tight mb-3">
-      Medborgarskapsprovet online
+      Medborgarskapsprov online
     </h3>
 
     <p className="text-sm md:text-base text-muted-foreground mb-6">
@@ -233,7 +233,7 @@ Välkommen till Medborgarskapsprov.se. Vi samlar och förklarar all viktig infor
     </p>
 
     <h3 className="text-lg md:text-xl font-semibold tracking-tight mb-3">
-      Medborgarskapsprovet i app
+      Medborgarskapsprov i app
     </h3>
 
     <p className="text-sm md:text-base text-muted-foreground mb-6">
