@@ -21,9 +21,20 @@ export const { docs, meta } = defineDocs({
       featured: z.boolean().optional().default(false),
       readTime: z.string().optional(),
       author: z.string().optional(),
-        authorImage: z.string().optional(),
+      authorImage: z.string().optional(),
       lastModified: z.union([z.string(), z.date()]).optional(),
       thumbnail: z.string().optional(),
+    }),
+  },
+});
+
+export const { docs: nyheterDocs, meta: nyheterMeta } = defineDocs({
+  dir: "app/nyheter/content",
+  docs: {
+    schema: frontmatterSchema.extend({
+      date: z.string(),
+      version: z.string().optional(),
+      tags: z.array(z.string()).optional(),
     }),
   },
 });
