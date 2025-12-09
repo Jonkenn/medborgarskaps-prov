@@ -26,6 +26,24 @@ export const metadata: Metadata = {
   authors: [{ name: "Medborgarskapsprov.se", url: siteConfig.url }],
   creator: "Medborgarskapsprov.se",
   publisher: "Medborgarskapsprov.se",
+
+icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/web-app-manifest-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/web-app-manifest-512x512.png", sizes: "512x512", type: "image/png" }
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180" }
+    ],
+    other: [
+      { rel: "manifest", url: "/site.webmanifest" }
+    ]
+  },
+
+
   openGraph: {
     type: "website",
     locale: "sv_SE",
