@@ -95,22 +95,6 @@ export async function generateMetadata(
         ? new Date(d.lastModified).toISOString()
         : undefined;
 
-    const structuredData = buildBlogPostingStructuredData({
-      title: d.title,
-      description: d.description,
-      slug,
-      canonicalUrl,
-      ogImageUrl,
-      publishedTime,
-      modifiedTime,
-      keywords,
-      authorName: d.author || "Medborgarskapsprov.se",
-      authorImageUrl:
-        typeof d.authorImage === "string" && d.authorImage.length > 0
-          ? d.authorImage
-          : undefined,
-    });
-
     return {
       title: d.title || "Blog Post",
       description:
