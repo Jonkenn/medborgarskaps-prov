@@ -30,14 +30,26 @@ export function SiteNav() {
               href="/online"
               className="transition-colors hover:text-foreground/80 text-foreground/70 whitespace-nowrap"
             >
-              Medborgarskapsprov online
+              Online
             </Link>
 
             <Link
               href="/app"
               className="transition-colors hover:text-foreground/80 text-foreground/70 whitespace-nowrap"
             >
-              Medborgarskapsprov app
+              App
+            </Link>
+                 <Link
+              href="/samhallskunskap"
+              className="transition-colors hover:text-foreground/80 text-foreground/70 whitespace-nowrap"
+            >
+              Samhällskunskap
+            </Link>
+                   <Link
+              href="/nyheter"
+              className="transition-colors hover:text-foreground/80 text-foreground/70 whitespace-nowrap"
+            >
+              Nyheter
             </Link>
           </nav>
 
