@@ -42,7 +42,6 @@ export const metadata: Metadata = {
     description:
       "Om Medborgarskapsprov.se – en oberoende sida om det svenska medborgarskapsprovet, migrationspolitik och livet i Sverige.",
   },
-  other: { "script:ld+json": JSON.stringify(structuredData) },
 };
 
 export default function AboutPage() {

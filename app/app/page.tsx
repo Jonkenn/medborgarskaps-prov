@@ -78,7 +78,6 @@ export const metadata: Metadata = {
     description:
       "Läs om hur en framtida medborgarskapsprov app kan vara uppbyggd, vad du ska tänka på när du väljer app och hur du kan plugga redan nu.",
   },
-  other: { "script:ld+json": JSON.stringify(structuredData) },
 };
 
 export default function AppPage() {

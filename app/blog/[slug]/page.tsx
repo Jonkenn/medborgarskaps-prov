@@ -162,7 +162,6 @@ export async function generateMetadata(
         creator: "@medborgarskapsprov",
         site: "@medborgarskapsprov",
       },
-      other: { "script:ld+json": JSON.stringify(structuredData) },
     };
   } catch {
     return {

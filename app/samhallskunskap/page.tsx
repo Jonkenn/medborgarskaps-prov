@@ -76,7 +76,6 @@ export const metadata: Metadata = {
     description:
       "Läs om medborgarskapsprovet i samhällskunskap – innehåll, svårighetsgrad och hur du kan förbereda dig med övningsprov online eller i app.",
   },
-  other: { "script:ld+json": JSON.stringify(structuredData) },
 };
 
 export default function SamhallskunskapPage() {

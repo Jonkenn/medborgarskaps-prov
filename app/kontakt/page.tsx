@@ -41,7 +41,6 @@ export const metadata: Metadata = {
     description:
       "Kontakta Medborgarskapsprov.se – hör av dig med synpunkter, rättelser eller förslag på ämnen om medborgarskapsprovet, migrationspolitik och livet i Sverige.",
   },
-  other: { "script:ld+json": JSON.stringify(structuredData) },
 };
 
 export default function ContactPage() {

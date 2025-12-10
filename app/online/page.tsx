@@ -75,7 +75,6 @@ export const metadata: Metadata = {
     description:
       "Träna med medborgarskapsprov online – digitala övningsprov och quiz i samhällskunskap inför det svenska medborgarskapsprovet.",
   },
-  other: { "script:ld+json": JSON.stringify(structuredData) },
 };
 
 export default function OnlinePage() {
