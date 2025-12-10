@@ -9,7 +9,7 @@ import {
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 import Link from "next/link";
 
-const canonicalUrl = `${siteConfig.url}/about`;
+const canonicalUrl = `${siteConfig.url}/om`;
 
 const structuredData = [
   organizationSchema,

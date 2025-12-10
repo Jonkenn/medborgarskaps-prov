@@ -8,7 +8,7 @@ import {
 } from "@/lib/structured-data";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 
-const canonicalUrl = `${siteConfig.url}/contact`;
+const canonicalUrl = `${siteConfig.url}/kontakt`;
 
 const structuredData = [
   organizationSchema,
