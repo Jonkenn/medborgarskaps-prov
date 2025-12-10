@@ -65,7 +65,7 @@ export function SiteNav() {
               onClick={() => setOpen(false)}
               className="transition-colors hover:text-foreground/80 text-foreground/70"
             >
-              Medborgarskapsprov online
+              Online
             </Link>
 
             <Link
@@ -73,16 +73,24 @@ export function SiteNav() {
               onClick={() => setOpen(false)}
               className="transition-colors hover:text-foreground/80 text-foreground/70"
             >
-              Medborgarskapsprov app
+              App
             </Link>
                 <Link
               href="/samhallskunskap"
               onClick={() => setOpen(false)}
               className="transition-colors hover:text-foreground/80 text-foreground/70"
             >
-              Medborgarskapsprov i samhällskunskap
+              Samhällskunskap
+            </Link>
+                      <Link
+              href="/nyheter"
+              onClick={() => setOpen(false)}
+              className="transition-colors hover:text-foreground/80 text-foreground/70"
+            >
+              Nyheter
             </Link>
           </nav>
+          
 
           <div className="mt-6 pt-6 border-t border-border flex justify-start">
             <ThemeToggle />
