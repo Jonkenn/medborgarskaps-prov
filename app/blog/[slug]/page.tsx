@@ -52,9 +52,9 @@ const formatDate = (date: Date): string => {
 };
 
 // Generate metadata for SEO
-export async function generateMetadata(
-  { params }: PageProps
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   try {
     const { slug } = await params;
 
@@ -84,7 +84,12 @@ export async function generateMetadata(
       `${canonicalUrl}/opengraph-image`;
 
     const keywords: string[] = Array.isArray(d.tags) ? [...d.tags] : [];
-    keywords.push("Medborgarskapsprov", "Medborgarskap", "Migration", "Sverige");
+    keywords.push(
+      "Medborgarskapsprov",
+      "Medborgarskap",
+      "Migration",
+      "Sverige"
+    );
 
     const publishedTime =
       d.date && !Number.isNaN(new Date(d.date).getTime())
@@ -176,9 +181,8 @@ export default async function BlogPost({ params }: PageProps) {
   const formattedDate = formatDate(date);
 
   const authorKey = typeof d.author === "string" ? d.author : "";
-  const authorDetails = authorKey && isValidAuthor(authorKey)
-    ? getAuthor(authorKey)
-    : null;
+  const authorDetails =
+    authorKey && isValidAuthor(authorKey) ? getAuthor(authorKey) : null;
 
   const canonicalUrl = `${siteConfig.url}/blog/${slug}`;
   const keywords: string[] = Array.isArray(d.tags) ? [...d.tags] : [];
@@ -270,39 +274,48 @@ export default async function BlogPost({ params }: PageProps) {
 
       <div className="flex divide-x divide-border relative max-w-7xl mx-auto px-4 md:px-0 z-10">
         <div className="absolute max-w-7xl mx-auto left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] lg:w-full h-full border-x border-border p-0 pointer-events-none" />
-        <main className="w-full p-0 overflow-hidden">
-          {typeof d.thumbnail === "string" && d.thumbnail && (
-            <div className="relative w-full h-[500px] overflow-hidden object-cover border border-transparent">
-              <Image
-                src={d.thumbnail}
-                alt={d.title || "Blog post image"}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          )}
-          <div className="p-6 lg:p-10">
-            <div className="prose dark:prose-invert max-w-none prose-headings:scroll-mt-8 prose-headings:font-semibold prose-a:no-underline prose-headings:tracking-tight prose-headings:text-balance prose-p:tracking-tight prose-p:text-balance prose-lg">
-              <DocsBody>
-                <MDX />
-              </DocsBody>
-            </div>
-          </div>
-          <div className="mt-10">
-            <ReadMoreSection currentSlug={[slug]} currentTags={d.tags || []} />
-          </div>
-        </main>
+      <main className="w-full p-0 overflow-hidden">
+  {typeof d.thumbnail === "string" && d.thumbnail && (
+    <div className="relative w-full h-[500px] overflow-hidden object-cover border border-transparent">
+      <Image
+        src={d.thumbnail}
+        alt={d.title || "Blog post image"}
+        fill
+        className="object-cover"
+        priority
+      />
+    </div>
+  )}
 
-        <aside className="hidden lg:block w-[350px] flex-shrink-0 p-6 lg:p-10 bg-muted/60 dark:bg-muted/20">
-          <div className="sticky top-20 space-y-8">
-            {authorDetails && <AuthorCard author={authorDetails} />}
-            <div className="border border-border rounded-lg p-6 bg-card">
-              <TableOfContents />
-            </div>
-            <PromoContent variant="desktop" />
-          </div>
-        </aside>
+  <div className="p-6 lg:p-10">
+    {authorDetails && (
+      <div className="mb-4 lg:hidden">
+        <AuthorCard author={authorDetails} />
+      </div>
+    )}
+
+    <div className="prose dark:prose-invert max-w-none prose-headings:scroll-mt-8 prose-headings:font-semibold prose-a:no-underline prose-headings:tracking-tight prose-headings:text-balance prose-p:tracking-tight prose-p:text-balance prose-lg">
+      <DocsBody>
+        <MDX />
+      </DocsBody>
+    </div>
+  </div>
+
+  <div className="mt-10">
+    <ReadMoreSection currentSlug={[slug]} currentTags={d.tags || []} />
+  </div>
+</main>
+
+<aside className="hidden lg:block w-[350px] flex-shrink-0 p-6 lg:p-10 bg-muted/60 dark:bg-muted/20">
+  <div className="sticky top-20 space-y-8">
+    {authorDetails && <AuthorCard author={authorDetails} />}
+    <div className="border border-border rounded-lg p-6 bg-card">
+      <TableOfContents />
+    </div>
+    <PromoContent variant="desktop" />
+  </div>
+</aside>
+
       </div>
 
       <MobileTableOfContents />
