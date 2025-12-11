@@ -8,8 +8,33 @@ import {
 } from "@/lib/structured-data";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 import Link from "next/link";
+import { authors } from "@/lib/authors";
 
 const canonicalUrl = `${siteConfig.url}/om`;
+
+const pageDescription =
+  "Om Medborgarskapsprov.se – en oberoende sida om det svenska medborgarskapsprovet, migrationspolitik och livet i Sverige.";
+
+const teamItemList = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: Object.entries(authors).map(([key, author], index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    url: `${canonicalUrl}#${key}`,
+    item: {
+      "@type": "Person",
+      name: author.name,
+      jobTitle: author.position,
+      image: `${siteConfig.url}${author.avatar}`,
+      worksFor: {
+        "@type": "Organization",
+        name: siteConfig.name,
+        url: siteConfig.url,
+      },
+    },
+  })),
+};
 
 const structuredData = [
   organizationSchema,
@@ -18,33 +43,34 @@ const structuredData = [
     "AboutPage",
     "Om Medborgarskapsprov.se",
     canonicalUrl,
-    "Om Medborgarskapsprov.se – en oberoende sida om det svenska medborgarskapsprovet, migrationspolitik och livet i Sverige."
+    pageDescription
   ),
   buildBreadcrumbList([
     { name: "Hem", item: siteConfig.url },
     { name: "Om sidan", item: canonicalUrl },
   ]),
+  teamItemList,
 ];
 
 export const metadata: Metadata = {
   title: "Om Medborgarskapsprov.se",
-  description:
-    "Om Medborgarskapsprov.se – en oberoende sida om det svenska medborgarskapsprovet, migrationspolitik och livet i Sverige.",
+  description: pageDescription,
   alternates: { canonical: canonicalUrl },
   openGraph: {
     title: "Om Medborgarskapsprov.se",
-    description:
-      "Om Medborgarskapsprov.se – en oberoende sida om det svenska medborgarskapsprovet, migrationspolitik och livet i Sverige.",
+    description: pageDescription,
     type: "website",
+    url: canonicalUrl,
   },
   twitter: {
     title: "Om Medborgarskapsprov.se",
-    description:
-      "Om Medborgarskapsprov.se – en oberoende sida om det svenska medborgarskapsprovet, migrationspolitik och livet i Sverige.",
+    description: pageDescription,
   },
 };
 
 export default function AboutPage() {
+  const entries = Object.entries(authors);
+
   return (
     <div className="min-h-screen bg-background relative">
       <script
@@ -52,6 +78,7 @@ export default function AboutPage() {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
+
       <div className="absolute top-0 left-0 z-0 w-full h-[200px] [mask-image:linear-gradient(to_top,transparent_25%,black_95%)]">
         <FlickeringGrid
           className="absolute top-0 left-0 size-full"
@@ -69,107 +96,100 @@ export default function AboutPage() {
             Om Medborgarskapsprov.se
           </h1>
           <p className="text-muted-foreground text-sm md:text-base lg:text-lg mt-3">
-            <p className="text-muted-foreground text-sm md:text-base lg:text-lg mt-3">
-              Välkommen till oss på{" "}
-              <Link href="/" className="underline font-medium">
-                medborgarskapsprov.se
-              </Link>
-              .
-            </p>{" "}
-            <p>
-              Vi är en oberoende och icke-kommersiell informationssida om det
-              svenska medborgarskapsprovet, medborgarskapsregler,
-              migrationspolitik och vardagslivet i Sverige. Tanken är enkel: att
-              samla spridd information på ett ställe, förklara politiska och
-              juridiska förändringar på begriplig svenska och visa hur reglerna
-              faktiskt slår mot människor i verkligheten – inte bara på pappret.
-            </p>
-            <p>
-              Vi är en oberoende och icke-kommersiell informationssida om det
-              svenska medborgarskapsprovet, medborgarskapsregler,
-              migrationspolitik och vardagslivet i Sverige. Själva provet tas
-              fram av{" "}
-              <Link
-                href="https://www.uhr.se"
-                className="underline underline-offset-4"
-              >
-                UHR
-              </Link>{" "}
-              (Universitets- och högskolerådet), medan lagstiftningen kring
-              medborgarskapsprov beslutas av{" "}
-              <Link
-                href="https://www.riksdagen.se"
-                className="underline underline-offset-4"
-              >
-                Riksdagen
-              </Link>
-              . Tanken är enkel: att samla spridd information på ett ställe,
-              förklara politiska och juridiska förändringar på begriplig svenska
-              och visa hur reglerna faktiskt slår mot människor i verkligheten –
-              inte bara på pappret.
-            </p>
+            Välkommen till oss på{" "}
+            <Link href="/" className="underline font-medium">
+              medborgarskapsprov.se
+            </Link>
+            .
+          </p>
+          <p className="text-muted-foreground text-sm md:text-base lg:text-lg mt-3">
+            Vi är en oberoende och icke-kommersiell informationssida om det
+            svenska medborgarskapsprovet, medborgarskapsregler,
+            migrationspolitik och vardagslivet i Sverige. Tanken är enkel: att
+            samla spridd information på ett ställe, förklara politiska och
+            juridiska förändringar på begriplig svenska och visa hur reglerna
+            faktiskt slår mot människor i verkligheten – inte bara på pappret.
+          </p>
+          <p className="text-muted-foreground text-sm md:text-base lg:text-lg mt-3">
+            Själva provet tas fram av{" "}
+            <Link
+              href="https://www.uhr.se"
+              className="underline underline-offset-4"
+            >
+              UHR
+            </Link>{" "}
+            (Universitets- och högskolerådet), medan lagstiftningen kring
+            medborgarskapsprov beslutas av{" "}
+            <Link
+              href="https://www.riksdagen.se"
+              className="underline underline-offset-4"
+            >
+              Riksdagen
+            </Link>
+            . Tanken är enkel: att samla spridd information på ett ställe,
+            förklara politiska och juridiska förändringar på begriplig svenska
+            och visa hur reglerna faktiskt slår mot människor i verkligheten –
+            inte bara på pappret.
           </p>
         </div>
       </div>
 
       <div className="max-w-4xl mx-auto w-full px-6 lg:px-0 py-10 relative z-10">
         <div className="prose dark:prose-invert max-w-none prose-headings:scroll-mt-8 prose-headings:font-semibold prose-headings:tracking-tight prose-p:tracking-tight prose-p:text-balance prose-lg">
-       <h2>Vad vi gör</h2>
+          <h2>Vad vi gör</h2>
 
-  <p>
-    Under arbetet med Medborgarskapsprov.se har fokus legat på att samla,
-    strukturera och förklara information om det svenska medborgarskapsprovet,
-    språkkravet och de nya reglerna för svenskt medborgarskap på ett sätt som är
-    sakligt, överskådligt och praktiskt användbart.
-  </p>
+          <p>
+            Under arbetet med Medborgarskapsprov.se har fokus legat på att
+            samla, strukturera och förklara information om det svenska
+            medborgarskapsprovet, språkkravet och de nya reglerna för svenskt
+            medborgarskap på ett sätt som är sakligt, överskådligt och praktiskt
+            användbart.
+          </p>
 
-  <ul>
-    <li>
-      Tillhandahålla samlad vägledning om{" "}
-      <Link href="/online" className="underline underline-offset-4">
-        medborgarskapsprov online
-      </Link>, där provets uppbyggnad, moment och kunskapsområden presenteras i
-      strukturerad form.
-    </li>
-    <li>
-      Erbjuda information om{" "}
-      <Link href="/app" className="underline underline-offset-4">
-        medborgarskapsprovet i app
-      </Link>, som ett alternativt sätt att ta del av samma innehåll i ett
-      mobilanpassat format.
-    </li>
-    <li>
-      Redogöra för innehållet i{" "}
-      <Link
-        href="/samhallskunskap"
-        className="underline underline-offset-4"
-      >
-        medborgarskapsprov i samhällskunskap
-      </Link>, inklusive demokrati, rättssystem, myndigheter, val och
-      samhällsorganisation.
-    </li>
-    <li>
-      Följa och förklara lagförslag, politiska överenskommelser och
-      myndighetsbeslut som påverkar medborgarskapsprovet och
-      medborgarskapsreglerna.
-    </li>
-    <li>
-      Belysa bredare frågor om migrationspolitik, rättspraxis, domstolsbeslut,
-      JO/JK-ärenden samt hur regelverken tillämpas i praktiken.
-    </li>
-    <li>
-      Ge kontext kring svenska system i stort, såsom folkbokföring, bostad,
-      arbete, välfärd, språk och andra delar som påverkar livet före och efter
-      medborgarskap.
-    </li>
-  </ul>
-
-
-
-
-
-
-
+          <ul>
+            <li>
+              Tillhandahålla samlad vägledning om{" "}
+              <Link href="/online" className="underline underline-offset-4">
+                medborgarskapsprov online
+              </Link>
+              , där provets uppbyggnad, moment och kunskapsområden presenteras i
+              strukturerad form.
+            </li>
+            <li>
+              Erbjuda information om{" "}
+              <Link href="/app" className="underline underline-offset-4">
+                medborgarskapsprovet i app
+              </Link>
+              , som ett alternativt sätt att ta del av samma innehåll i ett
+              mobilanpassat format.
+            </li>
+            <li>
+              Redogöra för innehållet i{" "}
+              <Link
+                href="/samhallskunskap"
+                className="underline underline-offset-4"
+              >
+                medborgarskapsprov i samhällskunskap
+              </Link>
+              , inklusive demokrati, rättssystem, myndigheter, val och
+              samhällsorganisation.
+            </li>
+            <li>
+              Följa och förklara lagförslag, politiska överenskommelser och
+              myndighetsbeslut som påverkar medborgarskapsprovet och
+              medborgarskapsreglerna.
+            </li>
+            <li>
+              Belysa bredare frågor om migrationspolitik, rättspraxis,
+              domstolsbeslut, JO/JK-ärenden samt hur regelverken tillämpas i
+              praktiken.
+            </li>
+            <li>
+              Ge kontext kring svenska system i stort, såsom folkbokföring,
+              bostad, arbete, välfärd, språk och andra delar som påverkar livet
+              före och efter medborgarskap.
+            </li>
+          </ul>
 
           <h2>Vad Medborgarskapsprov.se handlar om</h2>
           <p>
@@ -253,6 +273,57 @@ export default function AboutPage() {
             och formas av vilka frågor människor faktiskt går runt och bär på.
           </p>
         </div>
+
+        <section className="mt-12">
+          <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground text-center">
+            Medborgarskaps-prov.se
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-center mt-2">
+            Människorna bakom medborgarskapsprovet
+          </h2>
+          <p className="max-w-2xl mx-auto text-sm sm:text-base text-muted-foreground text-center mt-3">
+            Här hittar du personerna som skriver, granskar och bygger upp
+            innehållet om Sveriges nya medborgarskapsprov – från språkkrav
+            och samhällskunskap till lagändringar och tidslinjer.
+          </p>
+
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {entries.map(([key, author]) => (
+              <div
+                key={key}
+                id={key}
+                className="relative overflow-hidden rounded-xl border bg-background/60 shadow-sm transition"
+              >
+                <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" />
+
+                <div className="flex flex-col items-center px-5 pb-5 pt-8 text-center space-y-3">
+                  <div className="relative">
+                    <div className="absolute inset-0 blur-md opacity-40 transition" />
+                    <img
+                      src={author.avatar}
+                      alt={author.name}
+                      className="relative z-10 h-20 w-20 rounded-full border bg-background object-cover"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="text-base font-semibold tracking-tight">
+                      {author.name}
+                    </div>
+                    <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                      {author.position}
+                    </div>
+                  </div>
+
+                  <p className="text-xs text-muted-foreground line-clamp-3">
+                    Bidrar med analys, genomgångar och förklaringar kring
+                    medborgarskapsprov, språkkrav och svensk samhällskunskap.
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
