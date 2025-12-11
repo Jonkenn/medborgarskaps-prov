@@ -22,14 +22,14 @@ export function PromoContent({
           />
           <div className="flex-1 min-w-0">
             <p className="text-xs font-medium text-foreground/90 truncate">
-             Medborgarskapsprov på Facebook
+                         Allt om Sveriges medborgarskapsprov
             </p>
             <p className="text-xs text-muted-foreground truncate">
               Gå med i vår Facebook-grupp för att diskutera med andra om medborgarskapsprovet.
             </p>
           </div>
           <a
-            href="https://www.facebook.com/groups/2082292052576052"
+            href="https://www.facebook.com/groups/844824431602151/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-xs text-primary hover:text-primary/80 font-medium"
@@ -44,23 +44,23 @@ export function PromoContent({
 
   return (
     <a
-      href="https://www.facebook.com/groups/2082292052576052"
+      href="https://www.facebook.com/groups/844824431602151/"
       target="_blank"
       rel="noopener noreferrer"
       className={cn("block border border-border rounded-lg p-4 bg-card", className)}
     >
       <div className="flex flex-col gap-4">
         <img
-          src="/swedish-citizenship-facebook.png"
+          src="/medborgarskapsprov-horizontal-logo.png"
           alt="Medborgarskapsprov.se Facebook Group"
           className="w-full h-40 rounded-md object-cover"
         />
         <div className="flex flex-col gap-1">
           <h3 className="text-lg font-semibold tracking-tighter">
-            We&apos;re at Facebook
+            Allt om Sveriges medborgarskapsprov
           </h3>
           <p className="text-sm text-muted-foreground">
-            Meet, discuss & talk with people about medborgarskapsprovet och livet i Sverige.
+            Gå med i vår Facebook-grupp för att diskutera med andra om medborgarskapsprovet.
           </p>
         </div>
       </div>
