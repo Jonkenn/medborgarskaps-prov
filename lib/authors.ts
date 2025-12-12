@@ -5,7 +5,7 @@ export interface Author {
 }
 
 export const authors: Record<string, Author> = {
-   Nour: {
+   nour: {
     name: "Nour",
     position: "Author",
     avatar: "/authors/nour.png",
