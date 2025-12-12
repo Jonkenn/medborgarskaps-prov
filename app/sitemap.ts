@@ -10,41 +10,40 @@ const blogSource = loader({
   source: createMDXSource(docs, meta),
 });
 
+function toValidDate(value: unknown): Date | undefined {
+  if (typeof value === "string" && value.trim()) {
+    const d = new Date(value);
+    return Number.isNaN(d.getTime()) ? undefined : d;
+  }
+  if (typeof value === "number") {
+    const d = new Date(value);
+    return Number.isNaN(d.getTime()) ? undefined : d;
+  }
+  return undefined;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url.replace(/\/$/, "");
 
   const staticPages: MetadataRoute.Sitemap = [
-    {
-      url: `${base}/`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${base}/blog`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${base}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${base}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
+    { url: `${base}/`, changeFrequency: "weekly", priority: 1 },
+    { url: `${base}/blog`, changeFrequency: "weekly", priority: 0.8 },
+
+    { url: `${base}/nyheter`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${base}/online`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${base}/samhallskunskap`, changeFrequency: "monthly", priority: 0.7 },
+
+    { url: `${base}/om`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${base}/kontakt`, changeFrequency: "monthly", priority: 0.5 },
   ];
 
   const posts: MetadataRoute.Sitemap = blogSource.getPages().map((page) => {
     const path = page.url.startsWith("/") ? page.url : `/${page.url}`;
+    const lastModified = toValidDate(page.data?.date);
+
     return {
       url: `${base}${path}`,
-      lastModified: page.data?.date ? new Date(page.data.date) : new Date(),
+      ...(lastModified ? { lastModified } : {}),
       changeFrequency: "monthly",
       priority: 0.7,
     };
