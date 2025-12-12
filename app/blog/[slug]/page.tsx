@@ -161,6 +161,8 @@ export async function generateMetadata({
   }
 }
 
+
+
 export default async function BlogPost({ params }: PageProps) {
   const { slug } = await params;
 
@@ -202,9 +204,12 @@ export default async function BlogPost({ params }: PageProps) {
     description: d.description,
     slug,
     canonicalUrl,
-    ogImageUrl:
-      (typeof d.thumbnail === "string" && d.thumbnail) ||
-      `${canonicalUrl}/opengraph-image`,
+ogImageUrl:
+  typeof d.thumbnail === "string" && d.thumbnail.length > 0
+    ? d.thumbnail.startsWith("http")
+      ? d.thumbnail
+      : `${siteConfig.url}${d.thumbnail.startsWith("/") ? "" : "/"}${d.thumbnail}`
+    : `${canonicalUrl}/opengraph-image`,
     publishedTime,
     modifiedTime,
     keywords,
