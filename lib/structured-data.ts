@@ -5,20 +5,15 @@ const context = "https://schema.org";
 /**
  * Organization schema. Google suggests there are no required fields for an
  * Organization, but adding relevant properties like a logo, description and
- * contactPoint helps Google choose the right branding and contact details
- * for search results:contentReference[oaicite:0]{index=0}:contentReference[oaicite:1]{index=1}.
+ * contactPoint helps Google choose the right branding and contact details.
  */
 export const organizationSchema = {
   "@context": context,
   "@type": "Organization",
-  // Basic identity
   name: siteConfig.name,
   url: siteConfig.url,
-  // Enrich the organization with a logo and description
-  // Use a crawlable, square image for the logo:contentReference[oaicite:2]{index=2}.
   logo: "https://www.medborgarskaps-prov.se/images/logo-512.png",
   description: siteConfig.description,
-  // Provide at least one way for users to contact you:contentReference[oaicite:3]{index=3}.
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
@@ -54,7 +49,7 @@ export const blogSchema = {
  * Build a BreadcrumbList. Use this for blog posts or other nested pages.
  */
 export const buildBreadcrumbList = (
-  items: Array<{ name: string; item: string }>
+  items: Array<{ name: string; item: string }>,
 ): Record<string, unknown> => ({
   "@context": context,
   "@type": "BreadcrumbList",
@@ -68,14 +63,13 @@ export const buildBreadcrumbList = (
 
 /**
  * Generic WebPage builder. Accepts an optional primary image for the page.
- * The `primaryImageOfPage` property points at the main image on the page:contentReference[oaicite:4]{index=4}.
  */
 export const buildWebPageSchema = (
   type: string,
   name: string,
   url: string,
   description: string,
-  primaryImageUrl?: string
+  primaryImageUrl?: string,
 ): Record<string, unknown> => ({
   "@context": context,
   "@type": type,
@@ -90,13 +84,16 @@ export const buildWebPageSchema = (
  * Structured data for the home page. You can customise the hero image used
  * here or leave it undefined if you don’t want a primaryImageOfPage.
  */
-export const buildHomePageStructuredData = (): Record<string, unknown>[] => {
+export const buildHomePageStructuredData = (): Record<
+  string,
+  unknown
+>[] => {
   const webPageSchema = buildWebPageSchema(
     "CollectionPage",
     siteConfig.name,
     siteConfig.url,
     siteConfig.description,
-    "https://www.medborgarskaps-prov.se/images/hero-home.jpg"
+    "https://www.medborgarskaps-prov.se/images/hero-home.jpg",
   );
 
   return [organizationSchema, websiteSchema, blogSchema, webPageSchema];
@@ -107,21 +104,22 @@ export interface BlogPostingInput {
   description?: string;
   slug: string;
   canonicalUrl: string;
-  ogImageUrl?: string;
+  ogImageUrl?: string | string[];
   publishedTime?: string;
   modifiedTime?: string;
   keywords?: string[];
   authorName: string;
   authorImageUrl?: string;
+  authorUrl?: string; // optional profile URL for the author
 }
 
 /**
  * Build structured data for a blog post. It uses the `image` property to
  * point at the article’s image. Google recommends using multiple high‑
- * resolution images and ensuring they represent the content:contentReference[oaicite:5]{index=5}.
+ * resolution images and ensuring they represent the content.
  */
 export const buildBlogPostingStructuredData = (
-  input: BlogPostingInput
+  input: BlogPostingInput,
 ): Record<string, unknown>[] => {
   const {
     title,
@@ -134,9 +132,10 @@ export const buildBlogPostingStructuredData = (
     keywords,
     authorName,
     authorImageUrl,
+    authorUrl,
   } = input;
 
-  const articleSchema = {
+  const articleSchema: Record<string, unknown> = {
     "@context": context,
     "@type": "BlogPosting",
     headline: title || "Blog Post",
@@ -147,7 +146,7 @@ export const buildBlogPostingStructuredData = (
     author: {
       "@type": "Person",
       name: authorName,
-      url: siteConfig.url,
+      ...(authorUrl ? { url: authorUrl } : {}),
       ...(authorImageUrl ? { image: authorImageUrl } : {}),
     },
     publisher: {
@@ -157,11 +156,15 @@ export const buildBlogPostingStructuredData = (
     },
     ...(publishedTime ? { datePublished: publishedTime } : {}),
     ...(modifiedTime ? { dateModified: modifiedTime } : {}),
-    ...(ogImageUrl ? { image: [ogImageUrl] } : {}),
+    ...(ogImageUrl
+      ? {
+          image: Array.isArray(ogImageUrl) ? ogImageUrl : [ogImageUrl],
+        }
+      : {}),
     ...(Array.isArray(keywords) && keywords.length > 0
       ? { keywords: keywords.join(", ") }
       : {}),
-  } satisfies Record<string, unknown>;
+  };
 
   const breadcrumbSchema = buildBreadcrumbList([
     { name: "Blog", item: `${siteConfig.url}/blog` },
@@ -170,3 +173,85 @@ export const buildBlogPostingStructuredData = (
 
   return [organizationSchema, websiteSchema, articleSchema, breadcrumbSchema];
 };
+
+/**
+ * Build a Person schema. Include a name and optional URL, image, and jobTitle.
+ */
+export function buildPersonSchema(params: {
+  name: string;
+  url?: string;
+  image?: string;
+  jobTitle?: string;
+}): Record<string, unknown> {
+  const { name, url, image, jobTitle } = params;
+  const schema: Record<string, unknown> = {
+    "@context": context,
+    "@type": "Person",
+    name,
+  };
+  if (url) schema.url = url;
+  if (image) schema.image = image;
+  if (jobTitle) schema.jobTitle = jobTitle;
+  return schema;
+}
+
+/**
+ * Build an ItemList schema. Useful for listing an author’s posts or other items.
+ */
+export function buildItemListSchema(params: {
+  name: string;
+  url: string;
+  items: Array<{ name: string; url: string; position?: number }>;
+}): Record<string, unknown> {
+  const { name, url, items } = params;
+  return {
+    "@context": context,
+    "@type": "ItemList",
+    name,
+    url,
+    itemListElement: items.map((item, idx) => ({
+      "@type": "ListItem",
+      position: item.position ?? idx + 1,
+      name: item.name,
+      url: item.url,
+    })),
+  };
+}
+
+/**
+ * Build a complete JSON‑LD graph for a page. Start with organization and website,
+ * then add the current WebPage, any breadcrumbs, and any extra entities (like Person or ItemList).
+ */
+export function buildJsonLdGraph(params: {
+  canonicalUrl: string;
+  title: string;
+  description?: string;
+  breadcrumbs?: Array<{ name: string; url: string }>;
+  extra?: any[];
+}): any[] {
+  const { canonicalUrl, title, description, breadcrumbs, extra } = params;
+  const graph: any[] = [
+    organizationSchema,
+    websiteSchema,
+    {
+      "@context": context,
+      "@type": "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      url: canonicalUrl,
+      name: title,
+      description,
+      isPartOf: websiteSchema,
+    },
+  ];
+  if (breadcrumbs && breadcrumbs.length > 0) {
+    graph.push(
+      buildBreadcrumbList(
+        breadcrumbs.map(({ name, url }) => ({ name, item: url })),
+      ),
+    );
+  }
+  if (extra && extra.length > 0) {
+    graph.push(...extra);
+  }
+  return graph;
+}
