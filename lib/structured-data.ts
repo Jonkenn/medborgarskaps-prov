@@ -222,15 +222,18 @@ export function buildItemListSchema(params: {
  * Build a complete JSON‑LD graph for a page. Start with organization and website,
  * then add the current WebPage, any breadcrumbs, and any extra entities (like Person or ItemList).
  */
+export type JsonLdNode = Record<string, unknown>;
+
 export function buildJsonLdGraph(params: {
   canonicalUrl: string;
   title: string;
   description?: string;
   breadcrumbs?: Array<{ name: string; url: string }>;
-  extra?: any[];
-}): any[] {
+  extra?: JsonLdNode[];
+}): JsonLdNode[] {
   const { canonicalUrl, title, description, breadcrumbs, extra } = params;
-  const graph: any[] = [
+
+  const graph: JsonLdNode[] = [
     organizationSchema,
     websiteSchema,
     {
@@ -243,15 +246,16 @@ export function buildJsonLdGraph(params: {
       isPartOf: websiteSchema,
     },
   ];
+
   if (breadcrumbs && breadcrumbs.length > 0) {
     graph.push(
-      buildBreadcrumbList(
-        breadcrumbs.map(({ name, url }) => ({ name, item: url })),
-      ),
+      buildBreadcrumbList(breadcrumbs.map(({ name, url }) => ({ name, item: url }))),
     );
   }
+
   if (extra && extra.length > 0) {
     graph.push(...extra);
   }
+
   return graph;
 }

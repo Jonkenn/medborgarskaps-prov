@@ -18,6 +18,21 @@ const blogSource = loader({
   source: createMDXSource(docs, meta),
 });
 
+type BlogFrontmatter = {
+  title?: string;
+  author?: string;
+};
+
+function getFrontmatter(data: unknown): BlogFrontmatter {
+  if (typeof data !== "object" || data === null) return {};
+  const obj = data as Record<string, unknown>;
+
+  return {
+    title: typeof obj.title === "string" ? obj.title : undefined,
+    author: typeof obj.author === "string" ? obj.author : undefined,
+  };
+}
+
 export default function AuthorPage({
   params,
 }: {
@@ -32,7 +47,7 @@ export default function AuthorPage({
   const author = getAuthor(authorKey);
 
   const pages = blogSource.getPages();
-  const posts = pages.filter((page) => (page.data as any)?.author === authorKey);
+  const posts = pages.filter((page) => getFrontmatter(page.data).author === authorKey);
 
   const canonicalUrl = `${siteConfig.url}/author/${authorKey}`;
 
@@ -46,11 +61,14 @@ export default function AuthorPage({
   const itemListSchema = buildItemListSchema({
     name: `Artiklar av ${author.name}`,
     url: canonicalUrl,
-    items: posts.map((page, idx) => ({
-      name: (page.data as any).title || page.url,
-      url: `${siteConfig.url}${page.url}`,
-      position: idx + 1,
-    })),
+    items: posts.map((page, idx) => {
+      const fm = getFrontmatter(page.data);
+      return {
+        name: fm.title || page.url,
+        url: `${siteConfig.url}${page.url}`,
+        position: idx + 1,
+      };
+    }),
   });
 
   const jsonLd = buildJsonLdGraph({
@@ -87,16 +105,19 @@ export default function AuthorPage({
       </h2>
 
       <ul className="space-y-4">
-        {posts.map((page) => (
-          <li key={page.url}>
-            <Link
-              href={page.url}
-              className="text-lg font-medium hover:underline"
-            >
-              {(page.data as any).title}
-            </Link>
-          </li>
-        ))}
+        {posts.map((page) => {
+          const fm = getFrontmatter(page.data);
+          return (
+            <li key={page.url}>
+              <Link
+                href={page.url}
+                className="text-lg font-medium hover:underline"
+              >
+                {fm.title || page.url}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
