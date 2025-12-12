@@ -131,7 +131,7 @@ export default function AppPage() {
             </Link>{" "}
             samlar vi digitala övningsprov, och i guiden{" "}
             <Link
-              href="/samhällskunskap"
+              href="/samhallskunskap"
               className="underline underline-offset-4 font-medium"
             >
               Medborgarskapsprov i samhällskunskap
