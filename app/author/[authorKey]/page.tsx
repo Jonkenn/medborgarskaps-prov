@@ -12,6 +12,7 @@ import {
 } from "@/lib/structured-data";
 import Script from "next/script";
 import Link from "next/link";
+import Image from "next/image";
 
 const blogSource = loader({
   baseUrl: "/blog",
@@ -33,12 +34,12 @@ function getFrontmatter(data: unknown): BlogFrontmatter {
   };
 }
 
-export default function AuthorPage({
+export default async function AuthorPage({
   params,
 }: {
-  params: { authorKey: string };
+  params: Promise<{ authorKey: string }>;
 }) {
-  const { authorKey } = params;
+  const { authorKey } = await params;
 
   if (!isValidAuthor(authorKey)) {
     notFound();
@@ -47,7 +48,9 @@ export default function AuthorPage({
   const author = getAuthor(authorKey);
 
   const pages = blogSource.getPages();
-  const posts = pages.filter((page) => getFrontmatter(page.data).author === authorKey);
+  const posts = pages.filter(
+    (page) => getFrontmatter(page.data).author === authorKey
+  );
 
   const canonicalUrl = `${siteConfig.url}/author/${authorKey}`;
 
@@ -94,10 +97,13 @@ export default function AuthorPage({
       <h1 className="text-3xl font-semibold">{author.name}</h1>
       <p className="text-sm text-muted-foreground mb-6">{author.position}</p>
 
-      <img
+      <Image
         src={author.avatar}
         alt={author.name}
+        width={128}
+        height={128}
         className="w-32 h-32 rounded-full mb-4"
+        priority
       />
 
       <h2 className="text-2xl font-semibold mt-8 mb-4">
@@ -109,10 +115,7 @@ export default function AuthorPage({
           const fm = getFrontmatter(page.data);
           return (
             <li key={page.url}>
-              <Link
-                href={page.url}
-                className="text-lg font-medium hover:underline"
-              >
+              <Link href={page.url} className="text-lg font-medium hover:underline">
                 {fm.title || page.url}
               </Link>
             </li>
