@@ -32,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/nyheter`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${base}/online`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/samhallskunskap`, changeFrequency: "monthly", priority: 0.7 },
-
+    { url: `${base}/app`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/om`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/kontakt`, changeFrequency: "monthly", priority: 0.5 },
   ];
