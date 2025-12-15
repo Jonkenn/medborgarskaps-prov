@@ -102,7 +102,6 @@ export const buildHomePageStructuredData = (): Record<
 export interface BlogPostingInput {
   title?: string;
   description?: string;
-  slug: string;
   canonicalUrl: string;
   ogImageUrl?: string | string[];
   publishedTime?: string;
@@ -124,7 +123,6 @@ export const buildBlogPostingStructuredData = (
   const {
     title,
     description,
-    slug,
     canonicalUrl,
     ogImageUrl,
     publishedTime,

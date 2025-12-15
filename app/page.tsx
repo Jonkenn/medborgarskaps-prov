@@ -51,13 +51,6 @@ export default async function HomePage({
     return dateB - dateA;
   });
 
-  const allTags = [
-    "All",
-    ...Array.from(
-      new Set(sortedBlogs.flatMap((blog) => blog.data.tags || []))
-    ).sort(),
-  ];
-
   const selectedTag = resolvedSearchParams.tag || "All";
   const filteredBlogs =
     selectedTag === "All"
