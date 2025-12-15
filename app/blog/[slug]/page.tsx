@@ -202,7 +202,6 @@ export default async function BlogPost({ params }: PageProps) {
   const articleSchemas = buildBlogPostingStructuredData({
   title: d.title,
   description: d.description,
-  slug,
   canonicalUrl,
   ogImageUrl:
     typeof d.thumbnail === "string" && d.thumbnail.length > 0
