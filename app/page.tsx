@@ -64,16 +64,7 @@ export default async function HomePage({
       ? sortedBlogs
       : sortedBlogs.filter((blog) => blog.data.tags?.includes(selectedTag));
 
-  const tagCounts = allTags.reduce((acc, tag) => {
-    if (tag === "All") {
-      acc[tag] = sortedBlogs.length;
-    } else {
-      acc[tag] = sortedBlogs.filter((blog) =>
-        blog.data.tags?.includes(tag)
-      ).length;
-    }
-    return acc;
-  }, {} as Record<string, number>);
+
 
   const structuredData = buildHomePageStructuredData();
 
