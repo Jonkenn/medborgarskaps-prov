@@ -1,0 +1,187 @@
+import { docs, meta } from "@/.source";
+import { loader } from "fumadocs-core/source";
+import { createMDXSource } from "fumadocs-mdx";
+import { Suspense } from "react";
+import Link from "next/link";
+
+import { BlogCard } from "@/components/blog-card";
+import { TagFilter } from "@/components/tag-filter";
+import { FlickeringGrid } from "@/components/magicui/flickering-grid";
+
+import { siteConfig } from "@/lib/site";
+import { buildJsonLdGraph, buildItemListSchema, blogSchema } from "@/lib/structured-data";
+
+interface BlogData {
+  title: string;
+  description: string;
+  date: string;
+  tags?: string[];
+  featured?: boolean;
+  readTime?: string;
+  author?: string;
+  authorImage?: string;
+  thumbnail?: string;
+}
+
+interface BlogPage {
+  url: string;
+  data: BlogData;
+}
+
+const blogSource = loader({
+  baseUrl: "/blog",
+  source: createMDXSource(docs, meta),
+});
+
+const canonicalUrl = `${siteConfig.url}/blog`;
+
+export const metadata = {
+  title: "Nyheter & artiklar om medborgarskapsprovet",
+  description:
+    "Nyheter, guider och analyser om Sveriges medborgarskapsprov, språkkrav och samhällskunskap. Uppdateras löpande.",
+  alternates: { canonical: canonicalUrl },
+  openGraph: {
+    title: "Nyheter & artiklar om medborgarskapsprovet",
+    description:
+      "Nyheter, guider och analyser om Sveriges medborgarskapsprov, språkkrav och samhällskunskap.",
+    type: "website",
+    url: canonicalUrl,
+    siteName: siteConfig.name,
+    locale: "sv_SE",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nyheter & artiklar om medborgarskapsprovet",
+    description:
+      "Nyheter, guider och analyser om Sveriges medborgarskapsprov, språkkrav och samhällskunskap.",
+  },
+};
+
+const formatDate = (date: Date): string => {
+  return date.toLocaleDateString("sv-SE", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
+export default async function BlogIndexPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tag?: string }>;
+}) {
+  const resolvedSearchParams = await searchParams;
+
+  const allPages = blogSource.getPages() as BlogPage[];
+  const sortedBlogs = [...allPages].sort((a, b) => {
+    const dateA = new Date(a.data.date).getTime();
+    const dateB = new Date(b.data.date).getTime();
+    return dateB - dateA;
+  });
+
+  const allTags = [
+    "All",
+    ...Array.from(new Set(sortedBlogs.flatMap((blog) => blog.data.tags || []))).sort(),
+  ];
+
+  const selectedTag = resolvedSearchParams.tag || "All";
+  const filteredBlogs =
+    selectedTag === "All"
+      ? sortedBlogs
+      : sortedBlogs.filter((blog) => blog.data.tags?.includes(selectedTag));
+
+  const tagCounts = allTags.reduce((acc, tag) => {
+    if (tag === "All") {
+      acc[tag] = sortedBlogs.length;
+    } else {
+      acc[tag] = sortedBlogs.filter((blog) => blog.data.tags?.includes(tag)).length;
+    }
+    return acc;
+  }, {} as Record<string, number>);
+
+  const itemListSchema = buildItemListSchema({
+    name: "Artiklar",
+    url: canonicalUrl,
+    items: sortedBlogs.map((p, idx) => ({
+      name: p.data.title || p.url,
+      url: `${siteConfig.url}${p.url}`,
+      position: idx + 1,
+    })),
+  });
+
+  const jsonLd = buildJsonLdGraph({
+    canonicalUrl,
+    title: "Nyheter & artiklar om medborgarskapsprovet",
+    description:
+      "Nyheter, guider och analyser om Sveriges medborgarskapsprov, språkkrav och samhällskunskap.",
+    breadcrumbs: [
+      { name: "Hem", url: siteConfig.url },
+      { name: "Blogg", url: canonicalUrl },
+    ],
+    extra: [blogSchema, itemListSchema],
+  });
+
+  return (
+    <div className="min-h-screen bg-background relative">
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <div className="absolute top-0 left-0 z-0 w-full h-[200px] [mask-image:linear-gradient(to_top,transparent_25%,black_95%)]">
+        <FlickeringGrid
+          className="absolute top-0 left-0 size-full"
+          squareSize={4}
+          gridGap={6}
+          color="#6B7280"
+          maxOpacity={0.2}
+          flickerChance={0.05}
+        />
+      </div>
+
+      <div className="p-6 border-b border-border flex flex-col gap-6 min-h-[220px] justify-center relative z-10">
+        <div className="max-w-7xl mx-auto w-full">
+          <h1 className="font-medium text-3xl md:text-5xl tracking-tighter">
+            Nyheter & artiklar
+          </h1>
+          <p className="text-muted-foreground text-sm md:text-base lg:text-lg mt-3 max-w-4xl">
+            Här samlar vi nyheter, guider och förklaringar om medborgarskapsprovet,
+            språkkravet och samhällskunskap — uppdaterat när nya besked kommer.
+        
+            .
+          </p>
+        </div>
+
+        {allTags.length > 0 && (
+          <div className="max-w-7xl mx-auto w-full">
+            <TagFilter tags={allTags} selectedTag={selectedTag} tagCounts={tagCounts} />
+          </div>
+        )}
+      </div>
+
+      <div className="max-w-7xl mx-auto w-full px-6 lg:px-0">
+        <Suspense fallback={<div>Loading articles...</div>}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden border-x border-border border-b">
+            {filteredBlogs.map((blog) => {
+              const date = new Date(blog.data.date);
+              const formattedDate = formatDate(date);
+
+              return (
+                <BlogCard
+                  key={blog.url}
+                  url={blog.url}
+                  title={blog.data.title}
+                  description={blog.data.description}
+                  date={formattedDate}
+                  thumbnail={blog.data.thumbnail}
+                  showRightBorder={filteredBlogs.length < 3}
+                />
+              );
+            })}
+          </div>
+        </Suspense>
+      </div>
+    </div>
+  );
+}

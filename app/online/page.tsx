@@ -53,7 +53,7 @@ const structuredData = [
   ),
   buildBreadcrumbList([
     { name: "Hem", item: siteConfig.url },
-    { name: "Medborgarskapsprov online", item: canonicalUrl },
+{ name: "Online", item: canonicalUrl },
   ]),
   faqStructuredData,
 ];

@@ -165,13 +165,8 @@ export const buildBlogPostingStructuredData = (
       ? { keywords: keywords.join(", ") }
       : {}),
   };
-
-  const breadcrumbSchema = buildBreadcrumbList([
-    { name: "Blog", item: `${siteConfig.url}/blog` },
-    { name: title || slug, item: canonicalUrl },
-  ]);
-
-  return [organizationSchema, websiteSchema, articleSchema, breadcrumbSchema];
+  
+  return [organizationSchema, websiteSchema, articleSchema];
 };
 
 /**

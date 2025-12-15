@@ -10,7 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 import { siteConfig } from "@/lib/site";
-import { buildBlogPostingStructuredData } from "@/lib/structured-data";
+import { buildBlogPostingStructuredData, buildJsonLdGraph } from "@/lib/structured-data";
 
 import { TableOfContents } from "@/components/table-of-contents";
 import { MobileTableOfContents } from "@/components/mobile-toc";
@@ -199,33 +199,46 @@ export default async function BlogPost({ params }: PageProps) {
       ? new Date(d.lastModified).toISOString()
       : undefined;
 
-  const structuredData = buildBlogPostingStructuredData({
-    title: d.title,
-    description: d.description,
-    slug,
-    canonicalUrl,
-ogImageUrl:
-  typeof d.thumbnail === "string" && d.thumbnail.length > 0
-    ? d.thumbnail.startsWith("http")
-      ? d.thumbnail
-      : `${siteConfig.url}${d.thumbnail.startsWith("/") ? "" : "/"}${d.thumbnail}`
-    : `${canonicalUrl}/opengraph-image`,
-    publishedTime,
-    modifiedTime,
-    keywords,
-    authorName: d.author || "Medborgarskapsprov.se",
-    authorImageUrl:
-      typeof d.authorImage === "string" && d.authorImage.length > 0
-        ? d.authorImage
-        : undefined,
-  });
+  const articleSchemas = buildBlogPostingStructuredData({
+  title: d.title,
+  description: d.description,
+  slug,
+  canonicalUrl,
+  ogImageUrl:
+    typeof d.thumbnail === "string" && d.thumbnail.length > 0
+      ? d.thumbnail.startsWith("http")
+        ? d.thumbnail
+        : `${siteConfig.url}${d.thumbnail.startsWith("/") ? "" : "/"}${d.thumbnail}`
+      : `${canonicalUrl}/opengraph-image`,
+  publishedTime,
+  modifiedTime,
+  keywords,
+  authorName: d.author || "Medborgarskapsprov.se",
+  authorImageUrl:
+    typeof d.authorImage === "string" && d.authorImage.length > 0
+      ? d.authorImage
+      : undefined,
+});
+
+const jsonLd = buildJsonLdGraph({
+  canonicalUrl,
+  title: d.title || "Artikel",
+  description: d.description,
+  breadcrumbs: [
+    { name: "Hem", url: siteConfig.url },
+    { name: "Blogg", url: `${siteConfig.url}/blog` },
+    { name: d.title || slug, url: canonicalUrl },
+  ],
+  extra: articleSchemas,
+});
+
 
   return (
     <div className="min-h-screen bg-background relative">
       <script
         type="application/ld+json"
         suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <HashScrollHandler />
       <div className="absolute top-0 left-0 z-0 w-full h-[200px] [mask-image:linear-gradient(to_top,transparent_25%,black_95%)]">

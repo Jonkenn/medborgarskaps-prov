@@ -21,18 +21,20 @@ const teamItemList = {
   itemListElement: Object.entries(authors).map(([key, author], index) => ({
     "@type": "ListItem",
     position: index + 1,
-    url: `${canonicalUrl}#${key}`,
-    item: {
-      "@type": "Person",
-      name: author.name,
-      jobTitle: author.position,
-      image: `${siteConfig.url}${author.avatar}`,
-      worksFor: {
-        "@type": "Organization",
-        name: siteConfig.name,
-        url: siteConfig.url,
-      },
-    },
+url: `${siteConfig.url}/author/${key}`,
+item: {
+  "@type": "Person",
+  name: author.name,
+  url: `${siteConfig.url}/author/${key}`,
+  jobTitle: author.position,
+  image: `${siteConfig.url}${author.avatar}`,
+  worksFor: {
+    "@type": "Organization",
+    name: siteConfig.name,
+    url: siteConfig.url,
+  },
+}
+
   })),
 };
 
@@ -288,39 +290,41 @@ export default function AboutPage() {
           </p>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {entries.map(([key, author]) => (
-              <div
-                key={key}
-                id={key}
-                className="relative overflow-hidden rounded-xl border bg-background/60 shadow-sm transition"
-              >
-                <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" />
+      {entries.map(([key, author]) => (
+  <Link
+    key={key}
+    href={`/author/${key}`}
+      aria-label={`Gå till profil: ${author.name}`}
 
-                <div className="flex flex-col items-center px-5 pb-5 pt-8 text-center space-y-3">
-                  <div className="relative">
-                    <div className="absolute inset-0 blur-md opacity-40 transition" />
-                    <img
-                      src={author.avatar}
-                      alt={author.name}
-                      className="relative z-10 h-20 w-20 rounded-full border bg-background object-cover"
-                    />
-                  </div>
+    className="relative overflow-hidden rounded-xl border bg-background/60 shadow-sm transition hover:bg-muted/40"
+  >
+    <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" />
 
-                  <div className="space-y-1">
-                    <div className="text-base font-semibold tracking-tight">
-                      {author.name}
-                    </div>
-                    <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                      {author.position}
-                    </div>
-                  </div>
+    <div className="flex flex-col items-center px-5 pb-5 pt-8 text-center space-y-3">
+      <div className="relative">
+        <div className="absolute inset-0 blur-md opacity-40 transition" />
+        <img
+          src={author.avatar}
+          alt={author.name}
+          className="relative z-10 h-20 w-20 rounded-full border bg-background object-cover"
+        />
+      </div>
 
-                  <p className="text-xs text-muted-foreground line-clamp-3">
-                    Bidrar med analys, genomgångar och förklaringar kring
-                    medborgarskapsprov, språkkrav och svensk samhällskunskap.
-                  </p>
+      <div className="space-y-1">
+        <div className="text-base font-semibold tracking-tight">
+          {author.name}
+        </div>
+        <div className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
+          {author.position}
+        </div>
+      </div>
+
+      <p className="text-xs text-muted-foreground line-clamp-3">
+        Bidrar med analys, genomgångar och förklaringar kring
+        medborgarskapsprov, språkkrav och svensk samhällskunskap.
+      </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
