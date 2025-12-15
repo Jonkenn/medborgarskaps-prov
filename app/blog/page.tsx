@@ -2,7 +2,6 @@ import { docs, meta } from "@/.source";
 import { loader } from "fumadocs-core/source";
 import { createMDXSource } from "fumadocs-mdx";
 import { Suspense } from "react";
-import Link from "next/link";
 
 import { BlogCard } from "@/components/blog-card";
 import { TagFilter } from "@/components/tag-filter";
