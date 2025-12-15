@@ -217,6 +217,8 @@ export default async function BlogPost({ params }: PageProps) {
     typeof d.authorImage === "string" && d.authorImage.length > 0
       ? d.authorImage
       : undefined,
+        authorUrl: authorDetails ? `${siteConfig.url}/author/${authorKey}` : undefined,
+
 });
 
 const jsonLd = buildJsonLdGraph({
