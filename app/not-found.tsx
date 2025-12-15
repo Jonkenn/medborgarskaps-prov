@@ -20,11 +20,10 @@ export default function NotFound() {
           404
         </h1>
         <p className="text-muted-foreground text-base leading-relaxed text-center tracking-tight text-balance">
-          Sorry, we couldn&apos;t find the page you&apos;re looking for. The
-          page might have been moved, deleted, or you entered the wrong URL.
+          Tyvärr kunde vi inte hitta sidan du söker. Sidan kan ha flyttats, tagits bort eller så har du angett en felaktig webbadress.
         </p>
         <Button asChild className="w-full rounded-lg h-9 drop-shadow-lg">
-          <Link href="/">Back to Home</Link>
+          <Link href="/">Läs mer om medborgarskapsprovet</Link>
         </Button>
       </div>
     </div>

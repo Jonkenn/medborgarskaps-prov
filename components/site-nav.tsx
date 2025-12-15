@@ -27,29 +27,34 @@ export function SiteNav() {
         <div className="hidden sm:flex items-center gap-4">
           <nav className="flex items-center gap-6 text-sm font-medium">
             <Link
+              href="/blog"
+              className="transition-colors hover:text-foreground/80 text-foreground/70 whitespace-nowrap"
+            >
+              Blogg
+            </Link>
+            <Link
+              href="/nyheter"
+              className="transition-colors hover:text-foreground/80 text-foreground/70 whitespace-nowrap"
+            >
+              Nyheter
+            </Link>
+            <Link
               href="/online"
               className="transition-colors hover:text-foreground/80 text-foreground/70 whitespace-nowrap"
             >
               Online
             </Link>
-
             <Link
               href="/app"
               className="transition-colors hover:text-foreground/80 text-foreground/70 whitespace-nowrap"
             >
               App
             </Link>
-                 <Link
+            <Link
               href="/samhallskunskap"
               className="transition-colors hover:text-foreground/80 text-foreground/70 whitespace-nowrap"
             >
               Samhällskunskap
-            </Link>
-                   <Link
-              href="/nyheter"
-              className="transition-colors hover:text-foreground/80 text-foreground/70 whitespace-nowrap"
-            >
-              Nyheter
             </Link>
           </nav>
 
@@ -73,13 +78,26 @@ export function SiteNav() {
         <div className="sm:hidden border-t border-border bg-background px-6 py-6">
           <nav className="flex flex-col gap-4 text-sm font-medium">
             <Link
+              href="/blog"
+              onClick={() => setOpen(false)}
+              className="transition-colors hover:text-foreground/80 text-foreground/70"
+            >
+              Blogg
+            </Link>
+            <Link
+              href="/nyheter"
+              onClick={() => setOpen(false)}
+              className="transition-colors hover:text-foreground/80 text-foreground/70"
+            >
+              Nyheter
+            </Link>
+            <Link
               href="/online"
               onClick={() => setOpen(false)}
               className="transition-colors hover:text-foreground/80 text-foreground/70"
             >
               Online
             </Link>
-
             <Link
               href="/app"
               onClick={() => setOpen(false)}
@@ -87,22 +105,14 @@ export function SiteNav() {
             >
               App
             </Link>
-                <Link
+            <Link
               href="/samhallskunskap"
               onClick={() => setOpen(false)}
               className="transition-colors hover:text-foreground/80 text-foreground/70"
             >
               Samhällskunskap
             </Link>
-                      <Link
-              href="/nyheter"
-              onClick={() => setOpen(false)}
-              className="transition-colors hover:text-foreground/80 text-foreground/70"
-            >
-              Nyheter
-            </Link>
           </nav>
-          
 
           <div className="mt-6 pt-6 border-t border-border flex justify-start">
             <ThemeToggle />

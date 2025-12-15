@@ -3,7 +3,6 @@ import { loader } from "fumadocs-core/source";
 import { createMDXSource } from "fumadocs-mdx";
 import { Suspense } from "react";
 import { BlogCard } from "@/components/blog-card";
-import { TagFilter } from "@/components/tag-filter";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 import { buildHomePageStructuredData } from "@/lib/structured-data";
 import { SeparatorVertical } from "lucide-react";
@@ -102,21 +101,16 @@ export default async function HomePage({
               Medborgarskapsprov - allt om Sveriges medborgarskapsprov i samhällskunskap
             </h1>
             <p className="text-muted-foreground text-sm md:text-base lg:text-lg">
-Välkommen till Medborgarskapsprov.Vi samlar och förklarar all viktig information om det svenska medborgarskapsprovet på ett och samma ställe. Här får du en tydlig översikt av regler, krav, övningsfrågor och senaste nyheterna – så att du kan förbereda dig på rätt sätt inför provet.            </p>
+Vi kan Sveriges medborgarskapsprov i samhällskunskap. Vad är det för någonting & vilka behöver göra provet? Vi har svaret. Ta del av nyheter, information & startdatum.    </p>
           </div>
         </div>
-        {allTags.length > 0 && (
-          <div className="max-w-7xl mx-auto w-full">
-            <TagFilter
-              tags={allTags}
-              selectedTag={selectedTag}
-              tagCounts={tagCounts}
-            />
-          </div>
-        )}
+ 
       </div>
 
       <div className="max-w-7xl mx-auto w-full px-6 lg:px-0">
+         <h2 className="text-2xl md:text-2xl font-semibold tracking-tight mb-3 py-6">
+              Från bloggen
+            </h2>
         <Suspense fallback={<div>Loading articles...</div>}>
           <div
             className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 relative overflow-hidden border-x border-border ${
